@@ -3,16 +3,6 @@ package eu.salingers.katas.live.stringcalculator;
 public class StringCalculator {
 
 
-	@Override
-	public String toString() {
-		return "StringCalculator ["
-				+ (getClass() != null ? "getClass()=" + getClass() + ", " : "")
-				+ "hashCode()="
-				+ hashCode()
-				+ ", "
-				+ (super.toString() != null ? "toString()=" + super.toString()
-						: "") + "]";
-	}
 
 	public int add(String number) {
 		if (isDefault(number)) {
