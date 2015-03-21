@@ -3,15 +3,20 @@ package eu.salingers.ciphers;
 
 public class Vigener {
 
-	private static final String[] alphabet = new String[]{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+	public static final String[] alphabet = new String[]{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
 	public String encrypt(String key, String messageToEncrypt) {
 		char[] keySplit = createKeyArray(key, messageToEncrypt.length());
 		char[] messageSplit = messageToEncrypt.toCharArray();
 		StringBuilder sb = new StringBuilder();
-
+		int mod;
 		for (int i = 0; i < messageSplit.length; i++) {
-			final int mod = (messageSplit[i] + keySplit[i]) % alphabet.length + 1;
+			if(messageSplit.length <+ alphabet.length){
+				mod = (messageSplit[i] + keySplit[i]) % alphabet.length + 1;
+			}else{
+				mod = (messageSplit[i] + keySplit[i]) % alphabet.length + 1;
+			}
+
 			sb.append(alphabet[mod]);
 		}
 		return sb.toString();
@@ -24,7 +29,6 @@ public class Vigener {
 
 		for (int i = 0; i < messageSplit.length; i++) {
 			int mod = (messageSplit[i]-keySplit[i])% alphabet.length-1 ;
-
 			final String enc = mod>=0?alphabet[mod]:alphabet[mod+alphabet.length];
 			sb.append(enc);
 		}
