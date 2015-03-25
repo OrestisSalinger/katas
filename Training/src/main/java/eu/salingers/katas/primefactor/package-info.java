@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Orestis Salinger, orestis@salingers.eu
+ * @author orestis@salingers.eu Salinger, orestis@salingers.eu
  *
  */
 package eu.salingers.katas.primefactor;
