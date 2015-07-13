@@ -13,6 +13,7 @@ public class Synchronizer {
 
 	private static Logger LOGGER;
 
+
 	static {
 		LOGGER = Logger.getLogger(Synchronizer.class.getName());
 		try {
