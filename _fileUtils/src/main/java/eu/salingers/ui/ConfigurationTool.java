@@ -1,7 +1,11 @@
 package eu.salingers.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -19,11 +24,9 @@ import javax.swing.JScrollPane;
 
 import eu.salingers.FileFinder;
 
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+public class ConfigurationTool implements ActionListener {
+  private static final String COPY = "Copy!";
 
-public class ConfigurationTool
-    implements ActionListener {
   private static final String CHOOSE_DIRECTORY = "Please Choose Directory...";
 
   private static final String CANCEL = "Cancel";
@@ -36,19 +39,26 @@ public class ConfigurationTool
 
   JFileChooser chooser;
 
-  String choosertitle;
+  String choosertitle = "";
 
   private JLabel lblDirectory;
 
   private JButton btnCancel;
 
-  private JList<Object> lstFileList = new JList<>();
+  private JButton btnCopy;
 
-  private JScrollPane listPane = new JScrollPane();
+  private JList<Object> lstFileList = new JList<>();
+  
+  private JScrollPane listPane;
 
   private JFrame frame = new JFrame();
 
   private JPanel panel = new JPanel();
+
+  private JLabel lbStatusLabel;
+
+  private Object[] filesFound;
+
 
   public ConfigurationTool() {
     addComponentsToPanel();
@@ -58,8 +68,7 @@ public class ConfigurationTool
   private void addPanelToFrame() {
     frame.add(panel);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // EDIT
-//    frame.pack();
-    frame.getContentPane().add(panel,"Center");
+    frame.getContentPane().add(panel, "Center");
     frame.setSize(panel.getPreferredSize());
     frame.setVisible(true);
   }
@@ -68,28 +77,34 @@ public class ConfigurationTool
     panel.setSize(getPreferredSize());
 
     go = new JButton(CHOOSE_DIRECTORY);
-    go.setBounds(5, 5, 208, 29);
+    go.setBounds(25, 35, 220, 30);
     go.addActionListener(this);
     panel.setLayout(null);
     panel.add(go);
 
-    lblDirectory = new JLabel("Directory");
-    lblDirectory.setBounds(218, 11, 58, 16);
-    lblDirectory.setVisible(true);
-    panel.add(lblDirectory);
 
+    btnCopy = new JButton(COPY);
+    btnCopy.setBounds(25, 80, 110, 30);
+    btnCopy.addActionListener(this);
+    btnCopy.setEnabled(false);
+    panel.add(btnCopy);
+    
     btnCancel = new JButton(CANCEL);
-    btnCancel.setBounds(281, 5, 86, 29);
+    btnCancel.setBounds(135, 80, 110, 30);
     btnCancel.addActionListener(this);
     btnCancel.setEnabled(false);
     panel.add(btnCancel);
 
-    JLabel lblNewLabel = new JLabel("Copy all *.properties.sample files to *.properties files");
-    lblNewLabel.setBounds(372, 9, 429, 20);
-    lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-    panel.add(lblNewLabel);
+    lblDirectory = new JLabel();
+    lblDirectory.setBounds(32, 110, 800, 30);
+    lblDirectory.setVisible(true);
+    panel.add(lblDirectory);
 
-
+    lbStatusLabel = new JLabel("Copy all *.properties.sample files to *.properties files");
+//    
+//    lbStatusLabel.setBounds(372, 9, 429, 20);
+//    lbStatusLabel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+//    panel.add(lbStatusLabel);
 
   }
 
@@ -101,42 +116,52 @@ public class ConfigurationTool
       System.out.println("Entering case CHOOSE_DIRECTORY");
       String sourceFilePattern = WILDCARD + SOURCE_FILE_SUFFIX_PATTERN;
       File file = chooseDirectory();
-
+      filesFound = null;
       try {
         FileFinder finder = findFiles(Paths.get(file.getAbsolutePath()), sourceFilePattern);
-        Object[] fileArray = finder.getMatches().toArray();
-        lstFileList = new JList<Object>(fileArray);
+        filesFound = finder.getMatches().toArray();
 
-        lstFileList.setBounds(5, 90, 700, 100);
-        lstFileList.setVisibleRowCount(5);
-        listPane.setViewportView(lstFileList);
-
-        panel.add(lstFileList);
-
-        lstFileList.repaint();
       } catch (IOException e1) {
         // TODO Auto-generated catch block
         e1.printStackTrace();
       }
+      lstFileList = new JList<Object>(filesFound);
+      addListToUI();
       break;
 
     case CANCEL:
       System.out.println("Entering case CANCEL");
       cancel();
-      panel.remove(lstFileList);
-      panel.repaint();
       break;
+    case COPY:
+      System.out.println("Entering case COPY");
 
     default:
       break;
     }
   }
 
+  private void addListToUI() {
+    listPane = new JScrollPane();
+    lstFileList.setVisibleRowCount(7);
+    listPane.getViewport().setView(lstFileList);
+    listPane.setBounds(400, 300, 200, 200);
+    frame.getContentPane().add(listPane, BorderLayout.PAGE_END);
+    final int length = filesFound.length;
+    frame.setTitle("Copy all " + length + " *.sample files to *.properties files");
+    if(length > 0){
+      panel.setBackground(Color.RED);
+      btnCopy.setEnabled(true);
+    }
+
+  }
+
   private void cancel() {
+    panel.setBackground(Color.LIGHT_GRAY);
     lblDirectory.setVisible(false);
     go.setEnabled(true);
     btnCancel.setEnabled(false);
-
+    frame.getContentPane().remove(listPane);
   }
 
   private File chooseDirectory() {
@@ -157,12 +182,10 @@ public class ConfigurationTool
       btnCancel.setEnabled(true);
 
       lblDirectory.setText(chooser.getSelectedFile().toString());
-      System.out.println("getSelectedFile() : "
-          + chooser.getSelectedFile());
+      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
       return chooser.getSelectedFile();
 
-    }
-    else {
+    } else {
       System.out.println("No Selection ");
       return new File("");
     }
@@ -174,7 +197,7 @@ public class ConfigurationTool
   }
 
   public Dimension getPreferredSize() {
-    return new Dimension(1000, 500);
+    return new Dimension(1000, 300);
   }
 
   public static void main(String s[]) {
