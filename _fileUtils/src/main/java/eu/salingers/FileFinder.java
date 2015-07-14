@@ -57,7 +57,7 @@ import java.util.List;
      * @return the list of files found.
      * @throws IOException 
      */
-    List<File> copySampleFileToPropertiesFile(String removePattern) throws IOException {
+        public List<File> copySampleFileToPropertiesFile(String removePattern) throws IOException {
             System.out.println("************ Entering copyToName(String name)");
         	System.out.println("Matched: " + numMatches);
         	copyFilesToPartialFileNames(getMatches(), removePattern);
@@ -69,7 +69,7 @@ import java.util.List;
      * @param removePattern
      * @throws IOException
      */
-    public void copyFilesToPartialFileNames(List<File> sources, String removePattern) throws IOException{
+     void copyFilesToPartialFileNames(List<File> sources, String removePattern) throws IOException{
         for (File file : sources) {
 			copyFileToDifferentName(file, new File(file.getAbsolutePath().replace(removePattern, "")));
 		}

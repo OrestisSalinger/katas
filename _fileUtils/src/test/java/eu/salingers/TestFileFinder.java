@@ -16,7 +16,7 @@ public class TestFileFinder {
 	private static final String WILDCARD = "*";
 	private static final String SOURCE_FILE_SUFFIX_PATTERN = ".properties.sample";
 	private static final String PATH_IDCONNECT_REL = "../idconnect";
-
+	// /Users/orestis/Documents/workspace_legic/PROJECTS/superproject/
 	@Test
     public void getMatches_allPropertiesSampleFilesInFreshCheckout_finds30Files() throws IOException {
     	 Path startingDir = Paths.get(PATH_IDCONNECT_REL);

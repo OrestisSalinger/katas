@@ -3,9 +3,6 @@ package eu.salingers.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.LayoutManager;
-import java.awt.LayoutManager2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -27,13 +23,15 @@ import eu.salingers.FileFinder;
 public class ConfigurationTool implements ActionListener {
   private static final String COPY = "Copy!";
 
-  private static final String CHOOSE_DIRECTORY = "Please Choose Directory...";
+  private static final String CHOOSE_DIRECTORY = "Browse for directory...";
 
   private static final String CANCEL = "Cancel";
 
   private static final String WILDCARD = "*";
 
   private static final String SOURCE_FILE_SUFFIX_PATTERN = ".properties.sample";
+  
+  private static final String REMOVE_FROM_FILENAME = ".sample";
 
   JButton go;
 
@@ -55,9 +53,11 @@ public class ConfigurationTool implements ActionListener {
 
   private JPanel panel = new JPanel();
 
-  private JLabel lbStatusLabel;
-
   private Object[] filesFound;
+
+  private FileFinder finder;
+
+  private JPanel listContainer;
 
 
   public ConfigurationTool() {
@@ -70,6 +70,7 @@ public class ConfigurationTool implements ActionListener {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // EDIT
     frame.getContentPane().add(panel, "Center");
     frame.setSize(panel.getPreferredSize());
+    frame.setTitle("FILE TOOL");
     frame.setVisible(true);
   }
 
@@ -100,11 +101,6 @@ public class ConfigurationTool implements ActionListener {
     lblDirectory.setVisible(true);
     panel.add(lblDirectory);
 
-    lbStatusLabel = new JLabel("Copy all *.properties.sample files to *.properties files");
-//    
-//    lbStatusLabel.setBounds(372, 9, 429, 20);
-//    lbStatusLabel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-//    panel.add(lbStatusLabel);
 
   }
 
@@ -118,7 +114,7 @@ public class ConfigurationTool implements ActionListener {
       File file = chooseDirectory();
       filesFound = null;
       try {
-        FileFinder finder = findFiles(Paths.get(file.getAbsolutePath()), sourceFilePattern);
+        finder = findFiles(Paths.get(file.getAbsolutePath()), sourceFilePattern);
         filesFound = finder.getMatches().toArray();
 
       } catch (IOException e1) {
@@ -135,7 +131,13 @@ public class ConfigurationTool implements ActionListener {
       break;
     case COPY:
       System.out.println("Entering case COPY");
-
+      try {
+        finder.copySampleFileToPropertiesFile(REMOVE_FROM_FILENAME);
+      } catch (IOException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
+      break;
     default:
       break;
     }
@@ -144,9 +146,12 @@ public class ConfigurationTool implements ActionListener {
   private void addListToUI() {
     listPane = new JScrollPane();
     lstFileList.setVisibleRowCount(7);
+    listPane.setPreferredSize(new Dimension(350, 100));
     listPane.getViewport().setView(lstFileList);
-    listPane.setBounds(400, 300, 200, 200);
-    frame.getContentPane().add(listPane, BorderLayout.PAGE_END);
+    listContainer = new JPanel();
+    listContainer.add(listPane);
+    
+    frame.getContentPane().add(listContainer, BorderLayout.PAGE_END);
     final int length = filesFound.length;
     frame.setTitle("Copy all " + length + " *.sample files to *.properties files");
     if(length > 0){
@@ -161,12 +166,14 @@ public class ConfigurationTool implements ActionListener {
     lblDirectory.setVisible(false);
     go.setEnabled(true);
     btnCancel.setEnabled(false);
-    frame.getContentPane().remove(listPane);
+    frame.getContentPane().remove(listContainer);
   }
 
   private File chooseDirectory() {
     chooser = new JFileChooser();
-    chooser.setCurrentDirectory(new java.io.File("/Users/orestis/Documents/workspace_legic/PROJECTS/superproject/"));
+//    chooser.setCurrentDirectory(new java.io.File("/Users/orestis/Documents/workspace_legic/PROJECTS/superproject/"));
+    chooser.setCurrentDirectory(new java.io.File("."));
+
     chooser.setDialogTitle(choosertitle);
     chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     chooser.setFileHidingEnabled(true);
@@ -208,18 +215,5 @@ public class ConfigurationTool implements ActionListener {
       }
     });
   }
-
-  // frmFrame = new JFrame("");
-  // ConfigurationTool panel = new ConfigurationTool();
-  // frmFrame.addWindowListener(
-  // new WindowAdapter() {
-  // public void windowClosing(WindowEvent e) {
-  // System.exit(0);
-  // }
-  // }
-  // );
-  // frmFrame.getContentPane().add(panel,"Center");
-  // frmFrame.setSize(panel.getPreferredSize());
-  // frmFrame.setVisible(true);
-  // }
+  
 }
