@@ -1,6 +1,6 @@
-package eu.salingers;
+package eu.salingers.tooling.files;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;

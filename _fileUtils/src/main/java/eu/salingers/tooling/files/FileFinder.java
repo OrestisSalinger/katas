@@ -1,4 +1,4 @@
-package eu.salingers;
+package eu.salingers.tooling.files;
 
 
 /**
@@ -60,7 +60,7 @@ import java.util.List;
         public List<File> copySampleFileToPropertiesFile(String removePattern) throws IOException {
             System.out.println("************ Entering copyToName(String name)");
         	System.out.println("Matched: " + numMatches);
-        	copyFilesToPartialFileNames(getMatches(), removePattern);
+        	copyAndRemoveSuffix(getMatches(), removePattern);
         	return getMatches();
         }
 
@@ -69,7 +69,7 @@ import java.util.List;
      * @param removePattern
      * @throws IOException
      */
-     void copyFilesToPartialFileNames(List<File> sources, String removePattern) throws IOException{
+     void copyAndRemoveSuffix(List<File> sources, String removePattern) throws IOException{
         for (File file : sources) {
 			copyFileToDifferentName(file, new File(file.getAbsolutePath().replace(removePattern, "")));
 		}
@@ -124,4 +124,9 @@ import java.util.List;
 		public List<File> getMatches() {
 			return matches;
 		}
+
+    public void emptyFileList() {
+     matches = new ArrayList<File>();
+      
+    }
 }
