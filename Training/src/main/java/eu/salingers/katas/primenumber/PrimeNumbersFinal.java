@@ -9,7 +9,9 @@ import java.util.List;
  */
 public final class PrimeNumbersFinal {
 
-  private PrimeNumbersFinal() {
+  PrimeNumbersFinal() throws InstantiationException {
+    System.out.println("Do not instantiate " + PrimeNumbersFinal.class.getSimpleName());
+    throw new InstantiationException("Do not instantiate " + PrimeNumbersFinal.class.getSimpleName());
   }
 
   /**
@@ -22,27 +24,27 @@ public final class PrimeNumbersFinal {
 
     List<Integer> primes = new ArrayList<Integer>();
 
-    for (int i = 0; i < max; i++) {
-      addPrimesToList(calculate(i), primes, i);
+    for (int iteration = 0; iteration < max; iteration++) {
+      if (calculate(iteration) == 0) {
+        addPrimesToList(primes, iteration);
+      }
     }
 
     return primes;
   }
 
-  private static int calculate(final int i) {
+  private static int calculate(final int iteration) {
     int count = 0;
-    for (int j = 2; j <= i / 2; j++) {
-      if (isModuloZero(i, j)) {
+    for (int i = 2; i <= iteration / 2; i++) {
+      if (isModuloZero(iteration, i)) {
         count++;
       }
     }
     return count;
   }
 
-  private static void addPrimesToList(final int count, final List<Integer> primes, final int i) {
-    if (count == 0) {
+  private static void addPrimesToList(final List<Integer> primes, final int i) {
       primes.add(new Integer(i));
-    }
   }
 
   private static boolean isModuloZero(final int outerCount, final int innerCount) {

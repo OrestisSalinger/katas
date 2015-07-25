@@ -1,14 +1,9 @@
 package eu.salingers.katas.primenumber;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.internal.matchers.StartsWith;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import org.junit.rules.ExpectedException;
 
 /**
  * @author orestis@salingers.eu
@@ -21,7 +16,6 @@ public class PrimeNumbersFinalTest {
    */
   private static final int TWENTY = 20;
 
-  
   /**
    * .
    */
@@ -35,10 +29,21 @@ public class PrimeNumbersFinalTest {
   /**
    * @throws Exception .
    */
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
   
-  
-  
-  
+  @Test
+  public final void testPrimeNumbersConstructorIsPrivate() throws Exception {
+    thrown.expect(InstantiationException.class);
+    thrown.expectMessage("Do not instantiate PrimeNumbersFinal");
+    new PrimeNumbersFinal();
+
+  }
+
+  /**
+   * @throws Exception .
+   */
+
   @Test
   public final void testCalculatePrimeNumbersFirstFifty() throws Exception {
 

@@ -1,0 +1,31 @@
+maxTimeout=3600000
+global.processId=BleHandler
+
+rabbit.virtualhost=IDConnect
+rabbit.cmdExchange=CmdExchange
+rabbit.eventExchange=EventExchange
+rabbit.hostname=192.168.195.129
+rabbit.username=msgUser
+rabbit.password=password
+rabbit.validateMessages=true
+
+techuser.username=tech5
+techuser.password=lMhlVhZ>vRR6'JdI
+authenticationserver.url = http://192.168.195.129:8080/AuthenticationServer/IdConnect/WalletServer
+
+# BleHandler
+msg.queue.cmd_blehandler=cmd_BleHandler
+msg.queue.rsp_blehandler=rsp_BleHandler
+msg.component.blehandler=BleHandler
+
+# WalletServer
+msg.component.walletserver=WalletServer
+
+# KeyDeriveService
+msg.component.keyderiveservice=KeyDeriveService
+
+# ConnectStore
+msg.component.connectstore=ConnectStore
+
+# ControlCenter
+msg.component.controlcenter=ControlCenter

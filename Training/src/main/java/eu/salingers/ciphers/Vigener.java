@@ -1,5 +1,7 @@
 package eu.salingers.ciphers;
 
+import java.util.Arrays;
+
 
 public class Vigener {
 
@@ -7,11 +9,16 @@ public class Vigener {
 
 	public String encrypt(String key, String messageToEncrypt) {
 		char[] keySplit = createKeyArray(key, messageToEncrypt.length());
+		
 		char[] messageSplit = messageToEncrypt.toCharArray();
+		
+		System.out.println("messageSplit " + Arrays.toString(messageSplit));
+		System.out.println("    keySplit " + Arrays.toString(keySplit));
+        System.out.println("length " + messageSplit.length);
 		StringBuilder sb = new StringBuilder();
 		int mod;
 		for (int i = 0; i < messageSplit.length; i++) {
-			if(messageSplit.length <+ alphabet.length){
+			if(messageSplit.length < alphabet.length){
 				mod = (messageSplit[i] + keySplit[i]) % alphabet.length + 1;
 			}else{
 				mod = (messageSplit[i] + keySplit[i]) % alphabet.length + 1;

@@ -3,6 +3,7 @@ package eu.salingers.tooling.files.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -123,7 +124,7 @@ public class ConfigurationTool implements ActionListener {
     listContainer.setBackground(Color.YELLOW);
     listContainer.setPreferredSize(new Dimension(100, 100));
     frame.getContentPane().add(listContainer, BorderLayout.AFTER_LAST_LINE);
-    lstFileList.setVisibleRowCount(3);
+    
     GridBagLayout gbl_listContainer = new GridBagLayout();
     gbl_listContainer.columnWeights = new double[]{1.0};
     gbl_listContainer.rowWeights = new double[]{0.0};
