@@ -1,0 +1,1001 @@
+1. readRecords
+Sep 25, 2015 6:30:45 PM com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet isValidSelector
+WARNUNG: Unhandled CSS condition type '7'. Accepting it silently.
+Sep 25, 2015 6:30:45 PM com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter runtimeError
+SCHWERWIEGEND: runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[https://staging.identitycloud.ch/appdesigner/libs/jquery-1.11.3.js] line=[1276] lineSource=[null] lineOffset=[0]
+Sep 25, 2015 6:30:45 PM com.gargoylesoftware.htmlunit.WebConsole info
+INFORMATION: Legic Connect library loaded
+Sep 25, 2015 6:30:45 PM com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController processSynchron
+INFORMATION: Re-synchronized call to https://staging.identitycloud.ch/controlcenter/rest/v2/currentUser
+Sep 25, 2015 6:30:45 PM com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController processSynchron
+INFORMATION: Re-synchronized call to https://staging.identitycloud.ch/controlcenter/rest/v2/currentUserRights
+Sep 25, 2015 6:30:45 PM com.gargoylesoftware.htmlunit.WebConsole info
+INFORMATION: AppDesigner loaded
+Sep 25, 2015 6:30:46 PM com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine handleJavaScriptException
+INFORMATION: Caught script exception
+======= EXCEPTION START ========
+Exception class=[net.sourceforge.htmlunit.corejs.javascript.JavaScriptException]
+com.gargoylesoftware.htmlunit.ScriptException: TypeError: Unable to process binding "event: function () {
+    return {change: $root.metadata_import.PreviewImage($element, -1)};
+}"
+Message: Cannot find function readAsDataURL in object [object FileReader]. (https://staging.identitycloud.ch/appdesigner/build/appdesigner-0.0.9.min.js#458)
+    at com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine$HtmlUnitContextAction.run(JavaScriptEngine.java:865)
+    at net.sourceforge.htmlunit.corejs.javascript.Context.call(Context.java:628)
+    at net.sourceforge.htmlunit.corejs.javascript.ContextFactory.call(ContextFactory.java:513)
+    at com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.callFunction(JavaScriptEngine.java:796)
+    at com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.callFunction(JavaScriptEngine.java:768)
+    at com.gargoylesoftware.htmlunit.InteractivePage.executeJavaScriptFunctionIfPossible(InteractivePage.java:201)
+    at com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer.executeEventListeners(EventListenersContainer.java:199)
+    at com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer.executeBubblingListeners(EventListenersContainer.java:262)
+    at com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget.fireEvent(EventTarget.java:190)
+    at com.gargoylesoftware.htmlunit.html.DomElement$2.run(DomElement.java:1161)
+    at net.sourceforge.htmlunit.corejs.javascript.Context.call(Context.java:628)
+    at net.sourceforge.htmlunit.corejs.javascript.ContextFactory.call(ContextFactory.java:513)
+    at com.gargoylesoftware.htmlunit.html.DomElement.fireEvent(DomElement.java:1166)
+    at com.gargoylesoftware.htmlunit.html.HtmlPage.executeEventHandlersIfNeeded(HtmlPage.java:1252)
+    at com.gargoylesoftware.htmlunit.html.HtmlPage.initialize(HtmlPage.java:240)
+    at com.gargoylesoftware.htmlunit.WebClient.loadWebResponseInto(WebClient.java:483)
+    at com.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:350)
+    at com.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:415)
+    at com.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:400)
+    at eu.salingers.tooling.servers.HttpUrlServerConnection.getPageByHtmlUnitLogin(HttpUrlServerConnection.java:138)
+    at eu.salingers.tooling.servers.HttpUrlServerConnection.setResponseInServer(HttpUrlServerConnection.java:62)
+    at eu.salingers.tooling.servers.ServerRequestHandler.lambda$1(ServerRequestHandler.java:52)
+    at java.util.concurrent.ForkJoinTask$AdaptedCallable.exec(ForkJoinTask.java:1424)
+    at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+    at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+    at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+    at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: net.sourceforge.htmlunit.corejs.javascript.JavaScriptException: TypeError: Unable to process binding "event: function () {
+    return {change: $root.metadata_import.PreviewImage($element, -1)};
+}"
+Message: Cannot find function readAsDataURL in object [object FileReader]. (https://staging.identitycloud.ch/appdesigner/build/appdesigner-0.0.9.min.js#458)
+    at net.sourceforge.htmlunit.corejs.javascript.Interpreter.interpretLoop(Interpreter.java:1006)
+    at net.sourceforge.htmlunit.corejs.javascript.Interpreter.interpret(Interpreter.java:798)
+    at net.sourceforge.htmlunit.corejs.javascript.InterpretedFunction.call(InterpretedFunction.java:105)
+    at net.sourceforge.htmlunit.corejs.javascript.ContextFactory.doTopCall(ContextFactory.java:411)
+    at com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory.doTopCall(HtmlUnitContextFactory.java:310)
+    at net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.doTopCall(ScriptRuntime.java:3286)
+    at com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine$4.doRun(JavaScriptEngine.java:789)
+    at com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine$HtmlUnitContextAction.run(JavaScriptEngine.java:850)
+    ... 26 more
+JavaScriptException value = TypeError: Unable to process binding "event: function () {
+    return {change: $root.metadata_import.PreviewImage($element, -1)};
+}"
+Message: Cannot find function readAsDataURL in object [object FileReader].
+== CALLING JAVASCRIPT ==
+  function completed() {
+      if (document.addEventListener || event.type === "load" || document.readyState === "complete") {
+          detach();
+          jQuery.ready();
+      }
+  }
+======= EXCEPTION END ========
+
+getIds [Ljava.lang.Object;@37250fc5
+HTML
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link type="text/css" href="css/icons.css" rel="stylesheet" />
+        <link type="text/css" href="css/index.css" rel="stylesheet" />
+        <link type="text/css" href="css/contents.css" rel="stylesheet" />
+        <link type="text/css" href="css/fields.css" rel="stylesheet" />
+        <link type="text/css" href="css/grid.css" rel="stylesheet" />
+        <link type="text/css" href="css/dialogs.css" rel="stylesheet" />
+        <link type="text/css" href="css/debugging.css" rel="stylesheet" />
+        <link type="text/css" href="css/connectivity.css" rel="stylesheet" />
+        <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet" />
+        <!--<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />-->
+        <link type="text/css" href="css/font-awesome.min.css" rel="stylesheet" />
+        <link type="text/css" href="css/legic-alerts.less" rel="stylesheet/less" />
+
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="icon" href="favicon.ico" type="image/ico" />
+    </head>
+  <body>
+    <!-- Icon area -->
+    <div id="Header">
+      <div id="Title">
+        <!-- ko if: $root.settings.isAppDesigner -->
+          <img id="LogoApp" class="hidden" data-bind="css: { hidden: false }, attr: { src: 'images/logo_appdesigner_scaled.png' }" alt="Legic ApplicationDesigner Logo"/>
+        <!-- /ko -->        
+        <!-- ko ifnot: $root.settings.isAppDesigner -->
+          <img id="LogoCSW" class="hidden" data-bind="css: { hidden: false }, attr: { src: 'images/legic-logo.png' }" alt="Legic CSW-4000 Logo"/>
+        <!-- /ko -->        
+        <h1>
+            <span data-bind="text: $root.idc.settings.productName + ' (Remote: ' + OptionsRemote.Version() + ', Local: ' + OptionsLocal.Version() + ')'">Legic ApplicationDesigner (Remote: 0.0.0.0, Local: 0.0.0.0)</span>
+        </h1>
+      </div>
+
+      <ul id="IconBar">
+        <li>
+          <a id="Signal" title="Reader" class="dialog-link on" data-bind="css: { connected: ConnectedReader() != null }" href="javascript:;"></a>
+          <div id="ConnectionDialog" class="dialog">
+            <h2>Connection To Reader</h2>
+            <div>
+              <label for="COMPort">Reader:</label>
+              <select id="COMPort" data-bind="disable: ConnectedReader(), options: Readers, optionsText: NameOfReader, value: SelectedReader, optionsCaption: 'Select...'"></select>
+            </div>
+            <div>
+              <label for="BaudRate">Baud Rate:</label>
+              <select id="BaudRate" data-bind="disable: ConnectedReader(), options: Baudrates, value: SelectedBaudrate, optionsCaption: 'Select...'"></select> bps
+            </div>
+            <button id="ConnectButton" data-bind="enable: SelectedReader() != null && SelectedBaudrate() != null, text: (ConnectedReader() ? 'Disconnect' : 'Connect'), click: ConnectToReader">Set</button>
+          </div>
+        </li>
+
+        <li>
+          <div id="ConnectivityIndicator" title="Both sockets not connected">&nbsp;</div>
+        </li>
+
+        <li class="hidden" data-bind="css: { hidden: false }, visible: ConnectedReader()">
+          <a id="MasterTimeoutLink" class="dialog-link icon hourglas" title="Master Timeout" href="javascript:;"></a>
+          <div id="MasterTimeoutDialog" class="dialog">
+            <h2>Master Data Timeout</h2>
+            <div>
+              <label for="MasterTimeout">Timeout:</label>&nbsp;
+              <input id="MasterTimeout" type="number" name="quantity" min="1" max="255" data-bind="enable: ConnectedReader(), value: MasterDataTimeout"/> minute(s)
+            </div>
+            <button data-bind="click: SendMasterDataTimeout">Set</button>
+          </div>
+        </li>
+        <li>
+    <a class="icon question-mark" id="csw_help" title="Help" href="javascript:;" data-bind="click: function(data, event) { window.open('20131213_CSW-4000_V1.1_Online_Help/index.html', 'Help'); return false }"></a>
+        </li>
+        <!-- ko if: $root.settings.isAppDesigner -->
+        <li>
+          <span class="icon_text">|&nbsp;&nbsp;</span>
+          <span class="icon_text"><a href="LocalProxy.msi" id="download_link">Download Windows client</a></span>
+        </li>
+        <li>
+          <span class="icon_text">|&nbsp;&nbsp;</span>
+          <span class="icon_text"><a id="import" href="javascript:;">Import/Upload</a></span>
+        </li>
+        <!-- /ko -->
+        <li class="right-corner">
+          <!-- ko if: $root.settings.isAppDesigner -->
+          <span class="icon_text"><label>Project: </label>
+            <select id="ProjectList" data-bind="
+                    options: $root.Projects, 
+                    optionsValue: 'id', 
+                    optionsText: 'name',
+                    value: $root.SelectedProject"></select>
+          </span>
+          <span class="icon_text">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <!-- /ko -->
+          <a id="Trashcan" class="icon trash delete" title="Delete" href="javascript:;"></a>
+          <!-- ko if: $root.settings.isAppDesigner -->
+          <span class="icon_text">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <span class="icon_text"><a id="xa_login" title="Logout" href="javascript:;">Logout 
+            (<span data-bind="text: $root.LoginUserDetails() != null ? $root.LoginUserDetails().loginname : ''"></span>)
+          </a></span>
+          <!-- /ko -->
+        </li>
+      </ul>
+    </div>
+
+
+    <!-- Collections Area -->
+    <div id="Collections">
+      <!-- List of Transponders -->
+      <div id="Transponders" class="box">
+        <h2>Transponders</h2>
+        <ul class="objects" data-bind="foreach: { data: Transponders, afterRender: $root.SetupItem }">
+          <li class="transponder hidden" draggable="true"><!-- data-bind attr, see index.js -->
+            <div class="title">[Transponder Name]</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- List of Master Tokens -->
+      <div id="MasterTokens" class="box inverted">
+        <h2>Master Data</h2>
+        <ul class="objects" data-bind="foreach: { data: MasterTokens, afterRender: $root.SetupItem }">
+          <li class="master-token hidden" draggable="true"><!-- data-bind attr, see index.js -->
+            <div class="title">[Master Token Name]</div>
+            <progress data-bind="visible: (SegmentType() !== 'XAM'), attr: { title: Math.round($root.TimeoutTracker.MinutesLeft()) + ' minutes left', value: $root.TimeoutTracker.MinutesLeft() * 60, max: $root.MasterDataTimeout() * 60 }"></progress>
+            <div class="infos">
+              OLE: <span data-bind="text: S_OLE().toCustomString('disabled', 'enabled')"></span>,
+              FL: <span data-bind="text: FunctionLevel"></span>
+              <span data-bind="visible: Credit() != null">
+                Credits: <span data-bind="text: Credit"></span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- List of Transponder Definitions -->
+      <div id="TransponderDefinitions" class="box">
+        <h2>media definitions</h2>
+        <ul class="objects" data-bind="foreach: { data: TransponderDefinitions, afterRender: $root.SetupItem }">
+          <li class="transponder definition hidden" draggable="true"><!-- data-bind attr, see index.js -->
+            <img class="logo" data-bind="attr: { src: $root.idc.appdesigner.server.getIconUrl($data) }" alt="" />
+            <div class="title">[Media Definition Name]</div>
+          </li>
+        </ul>
+        <button data-bind="click: $root.NewTransponderDefinition" class="new">
+          <span class="icon plus"></span>New Media Definition
+        </button>
+      </div>
+
+      <!-- List of Segment Definitions -->
+      <div id="SegmentDefinitions" class="box">
+        <h2>app definitions</h2>
+        <ul class="objects" data-bind="foreach: { data: SegmentDefinitions, afterRender: $root.SetupItem }">
+          <li class="segment definition hidden" draggable="true"><!-- data-bind attr, see index.js -->
+            <img class="logo" data-bind="attr: { src: $root.idc.appdesigner.server.getIconUrl($data) }" alt="" />
+            <div class="title">[App Definition Name]</div>
+          </li>
+        </ul>
+        <button data-bind="click: $root.NewSegmentDefinition" class="new">
+          <span class="icon plus"></span>New App Definition
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Details area -->
+    <div id="Details">
+      <!-- Transponder Details -->
+      <div id="Transponder" class="box hidden" data-bind="css: { hidden: false }, visible: Transponder(), with: Transponder()">
+        <h2>Transponder</h2>
+        <!-- ko if: ObjectType() === 'TransponderDefinition' -->
+          <h4 class="info" id="transponder_metadata"><a href="javascript:;"><span class="icon expand"></span>Meta data</a></h4>
+          <fieldset id="transponder_details" data-bind="with: metadata">
+            <div><label>Creator</label><span data-bind="text: creator.userName"></span></div>
+            <div><label>Modifier</label><span data-bind="text: modifier.userName"></span></div>
+            <div><label>Name</label><span><input type="text" data-bind="value: name, valueUpdate: 'afterkeydown'"></input></span></div>
+            <div><label>Company Name</label><span><input type="text" data-bind="value: companyName" placeholder="eg. Legic Identsystems AG"></input></span></div>
+            <div><label>Icon</label>
+              <!-- opacity:0 instead of hidden class for chromium -->
+              <input type="file" id="meta-med-icon" accept="image/png" style="opacity: 0;"
+                     data-bind="event: { change: $root.metadata_import.PreviewImage($element) }" />
+              <span>
+                <label for="meta-med-icon">
+                  <img id="meta-med-icon-img" data-bind="attr: { src: $root.idc.appdesigner.server.getIconUrl($parent) }"/>
+                </label>
+              </span>
+            </div>
+            <!-- ko if: $root.settings.isAppDesigner -->
+              <div><label>Valid from</label><span><input type="text" data-bind="value: validFrom" placeholder="eg. 2015-01-01"></input></span></div>
+              <div><label>Valid to</label><span><input type="text" data-bind="value: validTo" placeholder="eg. 2015-12-31"></input></span></div>
+              <div><label>Description</label><span><textarea type="text" maxlength="2000" data-bind="value: description" cols="40" rows="5" placeholder="eg. This media definition contains all app definitions for an employee of company XY"></textarea></span></div>
+            <!-- /ko -->
+            <!-- category datalist are defined in import dialog -->
+            <div><label>Category</label><span><input type="text" data-bind="value: category" list="categories" placeholder="eg. Biometric, Vending, etc."></input></span></div>
+            <div><label>Remarks</label><span><textarea type="text" maxlength="2000" data-bind="value: remarks" cols="40" rows="5" placeholder="eg. used for demo only"></textarea></span></div>
+            <!--<div><label>Remarks</label><span><input type="text" data-bind="value: remarks" placeholder="eg. used for demo only"></input></span></div>-->
+            <!-- ko if: $root.settings.isAppDesigner -->
+                <!-- ko foreach: images -->
+                  <div><label data-bind="text: 'Image ' + ($index() + 1)">Image</label>
+                    <input type="file" accept="image/png" style="opacity: 0;" 
+                           data-bind="attr: { id: 'meta-med-image'+$index() }, event: { change: $root.metadata_import.PreviewImage($element, $index()) }" />
+                    <span>
+                      <label data-bind="attr: { for: 'meta-med-image'+$index() }">
+                        <img data-bind="attr: { src: $root.idc.appdesigner.server.toDataUrl($data), id: 'meta-med-image'+$index()+'-img' }"/>
+                      </label>
+                      <a href="javascript:;" class="icon trash" data-bind="click: function(data, event) { $root.RemoveImage($parent, $index()); }"></a>
+                    </span>
+                  </div>
+                <!-- /ko -->
+                <div><label class="icon maximize expand" data-bind="click: $root.AddImage" title="Add an additional image"></label></div>
+            <!-- /ko -->
+          </fieldset>
+        <!-- /ko -->
+        <!-- ko if: ObjectType() === 'Transponder' -->
+        <h4 class="info" id="transponder_advantinfo">
+          <a href="javascript:;">
+            <span class="icon expand"></span>Advant Info
+          </a>
+        </h4>
+        <fieldset>
+          <div>
+            <label>UID</label>
+            <span data-bind="text: Id"></span>
+          </div>
+          <div>
+            <label>Type</label>
+            <span data-bind="text: Type() + (isLegicTxp() ? '' : ' (3rd party txp)')"></span>
+          </div>
+          <div>
+            <label>RF Standard</label>
+            <span data-bind="text: RfStandard"></span>
+          </div>
+          <div>
+            <label>Used Bytes</label>
+            <span data-bind="text: UsedByteCount"></span>
+          </div>
+          <div>
+            <label>Free Bytes</label>
+            <span data-bind="text: FreeByteCount"></span>
+          </div>
+          <div>
+            <label>Available User Space</label>
+            <span data-bind="text: AvailableUserSpace"></span>
+          </div>
+        </fieldset>
+        <!-- /ko -->
+        <div class="empty-message" data-bind="visible: appDefinition().length === 0, text: $root.enums.emptyTexts[ObjectType()]"></div>
+        <!-- List of Segments -->
+        <div id="Segments" data-bind="visible: appDefinition().length > 0">
+          <h3>Apps</h3>
+          <ul class="objects" data-bind="foreach: { data: appDefinition, afterRender: $root.SetupItem }">
+            <li class="segment hidden" draggable="true"><!-- data-bind attr, see index.js -->
+              <img class="logo" data-bind="attr: { src: $root.idc.appdesigner.server.getIconUrl($data) }" alt="" />
+              <div class="title">[App X]</div>
+              <div class="subtitle">[App X Subtitle]</div>
+            </li>
+          </ul>
+        </div>
+        <button data-bind="visible: ObjectType() === 'TransponderDefinition' && appDefinition().length < 127, click: $root.NewSegmentDefinition" class="new">
+                <span class="icon plus"> </span>New App
+        </button>
+        <button data-bind="visible: ObjectType() === 'TransponderDefinition'/* && IsDirty*/, click: $root.SaveTransponderDefinition">
+          <span class="icon disk"></span>Save Changes
+        </button>
+
+      </div>
+
+      <!-- Master Token Details -->
+      <div id="MasterToken" class="box inverted hidden" data-bind="css: { hidden: false }, visible: MasterToken(), with: MasterToken()">
+        <h2>Master Data</h2>
+        <h4 class="info" id="mastertoken_advantinfo">
+          <a href="javascript:;">
+            <span class="icon expand"></span>Advant Info
+          </a>
+        </h4>
+        <fieldset>
+          <div>
+            <label>Zone</label>
+            <span data-bind="text: MasterDataRecordType().indexOf('Prime') >= 0 ? MasterTokenZone()+' (prime)' : MasterTokenZone()"></span>
+          </div>
+          <div>
+            <label>App Type</label>
+            <span data-bind="text: SegmentType() == 'AMplus' ? AMPlusType() : SegmentType()"></span>
+          </div>
+          <div>
+            <label>Function Level</label>
+            <span data-bind="text: FunctionLevel"></span>
+          </div>
+          <div>
+            <label>Organization Level</label>
+            <span data-bind="text: OrganizationLevel"></span>
+          </div>
+          <div>
+            <label>Stamp</label>
+            <span data-bind="text: StampBytes().toHexString($root.ByteSeparator)"></span>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Segment Details -->
+      <div id="Segment" class="box hidden" data-bind="css: { hidden: false }, visible: Segment(), with: Segment()">
+        <h2>App</h2>
+
+        <!-- ko if: ObjectType() === 'SegmentDefinition' -->
+          <h4 class="info" id="segment_metadata"><a href="javascript:;"><span class="icon expand"></span>Meta data</a></h4>
+          <fieldset id="segment_details" data-bind="with: metadata">
+            <div><label>Creator</label><span data-bind="text: creator.userName"></span></div>
+            <div><label>Modifier</label><span data-bind="text: modifier.userName"></span></div>
+            <div><label>Customer App Id</label><span><input type="text" placeholder="eg. myAppDefinitionId" data-bind="value: $parent.customerAppId, valueUpdate: 'afterkeydown', attr: { maxlength: 30 }"/></span></div>
+            <div><label>Name</label><span><input type="text" data-bind="value: name, valueUpdate: 'afterkeydown'"></input></span></div>
+            <div><label>Company Name</label><span><input type="text" data-bind="value: companyName" placeholder="eg. Legic Identsystems AG"></input></span></div>
+            <div><label>Icon</label>
+              <!-- opacity:0 instead of hidden class for chromium -->
+              <input type="file" id="meta-app-icon" accept="image/png" style="opacity: 0;"
+                     data-bind="event: { change: $root.metadata_import.PreviewImage($element) }" />
+              <span>
+                <label for="meta-app-icon">
+                  <img id="meta-app-icon-img" data-bind="attr: { src: $root.idc.appdesigner.server.getIconUrl($parent) }"/>
+                </label>
+              </span>
+            </div>
+            <!-- ko if: $root.settings.isAppDesigner -->
+              <div><label>Valid from</label><span><input type="text" data-bind="value: validFrom" placeholder="eg. 2015-01-01"></input></span></div>
+              <div><label>Valid to</label><span><input type="text" data-bind="value: validTo" placeholder="eg. 2015-12-31"></input></span></div>
+              <div><label>Description</label><span><textarea type="text" maxlength="2000" data-bind="value: description" cols="40" rows="5" placeholder="eg. This definition is used to purchase items from the company's vending machine"></textarea></span></div>
+            <!-- /ko -->
+            <!-- category datalist are defined in import dialog -->
+            <div><label>Category</label><span><input type="text" data-bind="value: category" list="categories" placeholder="eg. Biometric, Vending, etc."></input></span></div>
+            <!-- <div><label>Remarks</label><span><input type="text" data-bind="value: remarks" placeholder="eg. used for demo only"></input></span></div> -->
+            <div><label>Remarks</label><span><textarea type="text" maxlength="2000" data-bind="value: remarks" cols="40" rows="5" placeholder="eg. used for demo only"></textarea></span></div>
+            <!-- ko if: $root.settings.isAppDesigner -->
+                <!-- ko foreach: images -->
+                  <div><label data-bind="text: 'Image ' + ($index() + 1)">Image</label>
+                    <input type="file" accept="image/png" style="opacity: 0;" 
+                           data-bind="attr: { id: 'meta-app-image'+$index() }, event: { change: $root.metadata_import.PreviewImage($element, $index()) }" />
+                    <span>
+                      <label data-bind="attr: { for: 'meta-app-image'+$index() }">
+                        <img data-bind="attr: { src: $root.idc.appdesigner.server.toDataUrl($data), id: 'meta-app-image'+$index()+'-img' }"/>
+                      </label>
+                      <a href="javascript:;" class="icon trash" data-bind="click: function(data, event) { $root.RemoveImage($parent, $index()); }"></a>
+                    </span>
+                  </div>
+                <!-- /ko -->
+                <div><label class="icon maximize expand" data-bind="click: $root.AddImage" title="Add an additional image"></label></div>
+            <!-- /ko -->
+          </fieldset>
+        <!-- /ko -->
+        <h4 class="info" id="segment_advantinfo">
+          <a href="javascript:;">
+            <span class="icon expand"></span>Advant Info
+          </a>
+        </h4>
+        <fieldset id="segment_advantinfo_fieldset">
+          <!-- FIXME: ObjectType() === 'Segment' does not exist anymore -->
+          <!-- ko if: ObjectType() === 'Segment' -->
+            <!-- ko ifnot: SegmentType() === 'MifareApplication' -->
+              <div><label>Stamp</label><span data-bind="text: StampString"></span></div>
+              <div><label data-bind="text: (SegmentType() === 'DataSegment' ? 'Stamp Length' : 'Organization Level')"></label><span data-bind="text: StampBytes().length"></span></div>
+              <div><label>Master Token Zone</label><span data-bind="text: MasterTokenZone"></span></div>
+              <!-- ko if: SegmentType() !== 'AMplus' -->
+                <div><label>Type</label><span data-bind="text: SegmentType"></span></div>
+              <!-- /ko -->
+              <!-- ko if: SegmentType() === 'AMplus' -->
+                <div><label>Type</label><span data-bind="text: AMPlusType()"></span></div>
+                <div><label>Credits</label><span data-bind="text: Credits()"></span></div>
+              <!-- /ko -->
+              <div><label>Function Level</label><span data-bind="text: FunctionLevel"></span></div>
+              <div><label>Encryption</label><span data-bind="text: Encryption"></span></div>
+              <div><label>Number of Used Bytes</label><span data-bind="text: NumUsedBytes"></span></div>
+            <!-- /ko -->
+            <!-- ko if: SegmentType() === 'MifareApplication' -->
+              <div><label>AID</label><span data-bind="text: StampString"></span></div>
+              <div><label>Type</label><span data-bind="text: SegmentType"></span></div>
+              <div><label>Number of Used Bytes</label><span data-bind="text: NumUsedBytes"></span></div>
+            <!-- /ko -->
+          <!-- /ko -->
+          <!-- ko if: ObjectType() === 'SegmentDefinition' -->
+            <div><label>Segment Type</label><span><select data-bind="
+              options: $root.enums.SegmentTypes,
+              optionsText: $root.enums.GetSegmentTypeText,
+              value: appInfoAdvant.type,
+              event: { change : $root.SetDefaults($element) }"></select></span></div>
+            <div><label>User Data Size</label><span><input id="UserDataSize" type="number" data-bind="
+              attr: { min: $root.MinValue($element), max: $root.MaxValue($element) },
+              value: appInfoAdvant.dataLength,
+              enable: $root.EnableValue($element)" /></span></div>
+            <div><label>Encryption</label><span><select id="Encryption" data-bind="
+              options: $root.enums.Encryptions, 
+              optionsText: $root.enums.GetEncryptionName, 
+              value: appInfoAdvant.crypto,
+              enable: $root.EnableValue($element)"></select></span></div>
+            <div><label>Stamp</label><span><input class="stamp hex" type="text" data-bind="attr: { maxLength: 35 }, value: StampString" ></input></span></div>
+            <div><label data-bind="text: (appInfoAdvant.type() === 'DataSegment' ? 'Stamp Length' : 'Organization Level')"></label><span data-bind="text: atob(appInfoAdvant.stamp()).length"></span></div>
+            <div><label>Master Token Zone</label><span><select data-bind="options: $root.enums.Cids, optionsText: $root.enums.GetMasterTokenZone, value: appInfoAdvant.cid"></select></span></div>
+            <div><label>Function Level</label><span><input id="FunctionLevel" type="number" data-bind="
+              attr: { min: $root.MinValue($element), max: $root.MaxValue($element) },
+              value: appInfoAdvant.functionLevel,
+              enable: $root.EnableValue($element)"></input></span></div>
+          <!-- it will be back in the future version
+                    <div><label>User Defined Key</label><span><select data-bind="options: UserKeys, optionsText: GetUserKeyText, value: UserDefinedEncryption"></select></span></div>
+                    -->
+          <div>
+            <label>WRC</label>
+            <span>
+              <input id="S_WRC" type="number" data-bind="
+                            attr: { min: $root.MinValue($element), max: $root.MaxValue($element) }, 
+                            value: appInfoAdvant.wrc, 
+                            enable: $root.EnableValue($element)" />
+            </span>
+          </div>
+          <div>
+            <label>RD</label>
+            <span>
+              <input id="S_RD" type="checkbox" data-bind="
+                            checked: appInfoAdvant.rd,
+                            enable: $root.EnableValue($element)" />
+            </span>
+          </div>
+          <div>
+            <label>OLE</label>
+            <span>
+              <input id="S_OLE" type="checkbox" data-bind="checked: appInfoAdvant.organizationLevelEnable, enable: $root.EnableValue($element)" />
+            </span>
+          </div>
+          <div>
+            <label>DATA_WRP</label>
+            <span>
+              <input id="S_DATA_WRP" type="number" data-bind="
+                            attr: { min: $root.MinValue($element), max: $root.MaxValue($element) },
+                            value: appInfoAdvant.wrp, 
+                            enable: $root.EnableValue($element)" />
+            </span>
+          </div>
+          <div>
+            <label>OPT</label>
+            <span>
+              <input id="S_OPT" type="checkbox" disabled="disabled" data-bind="checked: $root.CheckedValue($element)" />
+            </span>
+          </div>
+          <!-- ko if: ((appInfoAdvant.type() === 'IAMplus') || (appInfoAdvant.type() === 'SAMplus')) -->
+          <div>
+            <label>Credits</label>
+            <span>
+              <input id="Credit" type="number" data-bind="
+                            value: appInfoAdvant.credits,
+                            attr: { min : 1, max : 16777215}" />
+            </span>
+          </div>
+          <!-- /ko -->
+          <!-- /ko -->
+        </fieldset>
+
+        <!-- ko if: $root.settings.isAppDesigner && ObjectType() === 'SegmentDefinition' -->
+        <h4 class="info" id="segment_bleinfo">
+          <a href="javascript:;">
+            <span class="icon expand"></span>BLE Info
+          </a>
+        </h4>
+          <fieldset id="ble_details" data-bind="with: metadata">
+            <div><label>Authorization</label><span>
+              <input type="text" list="bleAuthorizationList" data-bind="datalist: { options: $root.bleAuthorizationsLocal, value: $root.BleAuthorization }" placeholder="Insert Authorization" />
+            </span></div>
+          </fieldset>
+        <!-- /ko -->
+
+        <div data-bind="visible: $data.ObjectType() === 'SegmentDefinition'">
+          <div class="empty-message" data-bind="visible: dataFields().length === 0, text: $root.enums.emptyTexts[ObjectType()]"></div>
+          <!-- List of Fields -->
+          <div data-bind="visible: dataFields().length > 0">
+            <h3>Data Fields</h3>
+            <ul class="objects" data-bind="foreach: { data: dataFields, afterRender: $root.SetupItem }">
+                <li class="field hidden" draggable="true"><!-- data-bind attr, see index.js -->
+                  <div class="title">[Field Name]</div>
+                </li>
+            </ul>
+          </div>
+          <button data-bind="click: $root.NewField" class="new">
+            <span class="icon plus"> </span>New Field
+          </button>
+          <button data-bind="visible: ObjectType() === 'SegmentDefinition' && $root.Transponder() === null, click: $root.SaveSegmentDefinition">
+            <span class="icon disk"></span>Save Changes
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Fields -->
+      <div id="Fields" class="box hidden" data-bind="css: { hidden: false }, visible: Segment() && Segment().ObjectType() === 'SegmentDefinition' && Segment().dataFields().length > 0, with: Segment()">
+        <h2>Fields</h2>
+        <div class="scrolling">
+          <ul id="Fields_listcontainer" data-bind="foreach: { data: dataFields, afterRender: $root.selectItemOnFocus }">
+            <li class="field-editor" data-bind="css: { selected: $root.IsSelected($data) }, click: $root.SelectItem">
+              <h4 data-bind="text: name()">Field</h4>
+              <fieldset>
+                <div><label>Name</label><span><input type="text" data-bind="value: name, valueUpdate: 'afterkeydown', attr: { maxlength: 30 }"/></span></div>
+                <div><label>Type</label><span><select data-bind="options: $root.enums.FieldTypes, value: dataType"></select></span></div>
+                <div data-bind="visible: dataType() !== 'crc'"><label>Endian</label><span><select data-bind="options: $root.enums.Endianness[dataType()], value: endianness"></select></span></div>
+                <div data-bind="visible: $root.enums.EntryDiscriminators[dataType()].length > 0"><label>Entry</label><span><select data-bind="options: $root.enums.EntryDiscriminators[dataType()], value: entryType"></select></span></div>
+                <!-- ko if: dataType() === "number" || dataType() === "bcd" -->
+                  <div><label>Autoincrement</label><span><input type="checkbox" data-bind="checked: autoincrement, enable: $root.IsEnabledAutoincrementChange($data, $element), visible: $root.IsEnabledAutoincrementChange($data, $element)"/></span></div>
+                <!-- /ko -->
+                <div><label>Offset</label><span><input type="number" min="0" max="4096" data-bind="value: mapping.offset" /></span></div>
+                <div><label>Length</label><span><input type="number" maxlength="4" data-bind="value: length, attr: { min: $root.enums.LengthRanges[dataType()].min, max: $root.enums.LengthRanges[dataType()].max }" /></span></div>
+                <!-- ko if: dataType() !== "crc" -->
+                  <div><label>Hexadecimal</label><span><input class="hex" type="text" data-bind="value: HexStringData, attr: { maxlength: (length() * 3 - 1) }" /></span></div>
+                <!-- /ko -->
+                <!-- ko if: dataType() === "string" -->
+                  <div><label>Characters</label><span><input type="text" data-bind="value: StringData, attr: { maxlength: length }" /></span></div>
+                <!-- /ko -->
+
+                <!-- ko if: dataType() === "crc" -->
+                <fieldset class="CRC">
+                  <legend>Fields to be included in CRC</legend>
+                  <div>
+                    <div data-bind="foreach: { data: $parent.dataFields }">
+<!--                    <div data-bind="foreach: { data: $root.CrcFieldList($parent.dataFields) }">-->
+                      <div>
+                        <label data-bind="text: name">[Field Name]</label>
+                        <span>
+                          <input type="checkbox" data-bind="
+                            checked: $root.isCrcFieldChecked($parents[1], $data, $parent),
+                            disable: $root.isCrcFieldDisabled($data, $parent),
+                            click: function(data, event) { return $root.clickedCrcCheckbox($parents[1], $data, $parent, $element, event) },
+                            attr: { name: 'crc_' + $parent.fieldId() },
+                            value: fieldId" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- /ko -->
+              </fieldset>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bytes Grid -->
+      <div id="Grid" class="box hidden" data-bind="css: { hidden: false }, visible: Segment() && Segment().dataFields().length > 0, with: Segment()">
+        <h2>Bytes</h2>
+        <div id="GridContainer">
+          <div id="GridLabels" class="col">
+            <div class="index">Index</div>
+            <div>Hexadecimal</div>
+            <div>Decimal</div>
+            <div>Character</div>
+            <div>DATA_WRP</div>
+            <div>WRC</div>
+          </div>
+          <div id="GridScrollArea">
+            <div id="BytesContainer" data-bind="style: { width: (40 * (StampString().length + TotalFieldBytes()) + 2) + 'px' }">
+              <ul id="StampBytes" data-bind="foreach: appInfoAdvant.stamp().toBytesFromBase64(), visible: !($root.Transponder() && $root.Transponder().ObjectType() === 'Transponder' && $root.Transponder().IsMim())">
+                <li class="col">
+                  <div class="index number" data-bind="text: 'S' + $index()"></div>
+                  <div data-bind="text: $data.toHexString()"></div>
+                  <div></div>
+                  <div></div>
+                  <div>
+                    <span class="icon" data-bind="css: { 'closed-lock': $root.Segment().appInfoAdvant.wrp() > 0 }"></span>
+                  </div>
+                  <div>
+                    <span class="icon" data-bind="css: { 'closed-lock': $index() < $root.Segment().appInfoAdvant.wrc() }"></span>
+                  </div>
+                </li>
+              </ul>
+              <div id="SegmentBytes" data-bind="foreach: dataFields">
+                <ul class="field-bytes" data-bind="foreach: { data: Data, afterRender: $root.SetupByteColumn }, css: { selected: $data === $root.Field() }">
+                  <li class="col">
+                    <div class="index number" data-bind="text: $parent.mapping.offset() + $index()"></div>
+                    <input type="text" class="hex" maxlength="2" data-bind="visible: $root.IsEditable($index()), value: Hex, enable: $root.Segment().ObjectType().endsWith('Definition')" />
+                    <input type="number" maxlength="3" min="0" max="255" data-bind="visible: $root.IsEditable($index()), value: Value, enable: $root.Segment().ObjectType().endsWith('Definition')" />
+                    <input type="text" maxlength="1" data-bind="visible: $root.IsEditable($index()), value: Char, enable: $root.Segment().ObjectType().endsWith('Definition')" />
+                    <div>
+                      <span class="icon" data-bind="css: { 'closed-lock': ($parent.mapping.offset() + $index() < $root.Segment().appInfoAdvant.wrp()) }"></span>
+                    </div>
+                    <div>
+                      <span class="icon" data-bind="css: { 'closed-lock': $index() < $root.Segment().appInfoAdvant.wrc() }, visible: $root.Transponder() && $root.Transponder().ObjectType() === 'Transponder' && $root.Transponder().IsMim()">
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Message bar area -->
+    <!--
+    <div id="MessageBar">
+      <a class="show-more icon expand" accesskey="m" href="javascript:;"></a>
+      <div class="scrolling">
+        <ul class="hidden" data-bind="css: { hidden: false }, foreach: AllMessages">
+          <li data-bind="css: { 'sub-task': false }">
+            <span class="time" data-bind="text: $root.FormatTime(ko.utils.unwrapObservable($data.Time))">Time</span>
+            <span class="msg" data-bind="text: ko.utils.unwrapObservable(Text)">First Message</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    -->
+
+    <!-- Debugging area -->
+    <div id="Debugging">
+      <div id="Shortcuts" class="panel box">
+        <h2>Keyboard Shortcuts</h2>
+        <ul>
+          <li><span>Alt + Shift + ?</span> &gt; Keyboard Shortcuts</li>
+          <li><span>Alt + Shift + D</span> &gt; Drag and Drop Automation</li>
+          <li><span>Alt + Shift + S</span> &gt; Selection Path</li>
+          <li><span>Alt + Shift + L</span> &gt; Debug Log and Controls</li>
+          <li><span>Alt + Shift + R</span> &gt; Transcript Recording</li>
+        </ul>
+        <a id="ShortcutsSwitch" href="javascript:;" accesskey="?"></a>
+        <a id="DragAndDropSwitch" href="javascript:;" accesskey="d"></a>
+        <a id="SelectionPathSwitch" href="javascript:;" accesskey="s"></a>
+        <a id="LogSwitch" href="javascript:;" accesskey="l"></a>
+        <a id="RecorderSwitch" href="javascript:;" accesskey="r"></a>
+      </div>
+
+      <div id="SelectionPath" class="box panel">
+        <h2>Selection Path</h2>
+        <ul class="objects" data-bind="foreach: SelectionPath">
+          <li class="segment definition hidden"><!-- data-bind attr, see index.js -->
+            <span data-bind="text: $root.FormatTitle($data, true)"></span>
+            <span data-bind="text: new Date().getMilliseconds()"></span>
+          </li>
+        </ul>
+        <br />
+        <br />
+        <h2>Transponder, Segment, Field</h2>
+        <ul class="objects" data-bind="foreach: [Transponder(), Segment(), Field()]">
+          <li class="segment definition hidden" data-bind="visible: $data, with: $data"><!-- data-bind attr, see index.js -->
+            <span data-bind="text: $root.FormatTitle($parent, true)"></span>
+            <span data-bind="text: new Date().getMilliseconds()"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div id="DragAndDrop" class="panel box">
+        <h2>Drag and Drop Automation</h2>
+        <input id="DNDCapture" type="checkbox" /><label>Capture the next drag-and-drop action (without performing it).</label>
+        <br /><br /><br />
+        <label>Source:</label><input id="DNDSource" type="text" /><br />
+        <label>Destination:</label><input id="DNDTarget" type="text" /><br />
+        <br />
+        <button id="DNDSimulate" data-bind="click: function(data, event) { csw.SimulateDragAndDrop() }">Perform drag-and-drop action with given elements.</button>
+      </div>
+
+<!--
+      <div id="Log" class="panel box">
+        <h2>Debug Log and Controls</h2>
+          <button data-bind="click: function(data, event) { csw.AddMessage('Dummy message') }">Add dummy message</button>&nbsp;
+          <button data-bind="click: function(data, event) { blah() }">Force Javascript error</button>&nbsp;
+          <button data-bind="click: function(data, event) { $('.rendering-time').show() }">Show rendering times</button>
+          <button data-bind="click: function(data, event) { document.location.reload(true) }">Reload page</button>
+        <br /><br />
+      </div>
+-->
+      <div id="Recorder" class="panel box">
+        <h2>Transcript Recorder</h2>
+        <div id="RecSetup">
+          <label>Recorder:</label><input id="RecUrl" type="text" value="http://localhost:8008/" /><br />
+          <label>Name:</label><input id="Name" type="text" value="test/bug-1234" /> (no spaces or other special characters).<br /><br />
+          <button data-bind="click: function(data, event) { StartRecording() }">Start recording</button>
+        </div>
+        <div class="log"></div>
+        <br />
+        <div id="RecStop">
+        <button data-bind="click: function(data, event) { transcript.Store('notification', '/') }">Record snapshot ("/")</button>
+        <button data-bind="click: function(data, event) { transcript.StopRecording(); $('#RecStop').hide() }">Stop recording</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- confirmation dialogs -->
+    <div id="dialog-confirm-usb-reader-attached" title="USB-to-serial device detected">
+      <p>
+        <span class="ui-icon ui-icon-alert dialog-confirm-span-left"></span>USB-to-serial device attached to serial port <span id="dialog-confirm-usb-reader-attached-data"></span>.<br />
+        <br />Is this device a reader and would you like to connect it to the cloud (auto-closing dialog in 10 seconds)?
+      </p>
+    </div>
+    <!-- sam dialog -->
+    <div id="dialog-confirm-sam-handling" title="SAM detected">
+      <p>
+        <span class="ui-icon ui-icon-alert dialog-confirm-span-left"></span>Would you like to accept the SAM <span id="dialog-confirm-sam-handling-data"></span>?
+      </p>
+    </div>
+    <!-- iam handling dialog -->
+    <div id="dialog-confirm-iamplus-handling" title="IAM+ detected">
+      <span class="ui-icon ui-icon-alert dialog-confirm-span-left"></span>
+      <span>
+        An IAM+ with <span id="dialog-confirm-iamplus-handling-data"></span>
+        remaining authorizations has been detected.<br />
+        <br />
+        How many of these authorizations do you want to load into the reader?
+        <span class="dialog-confirm-span-right">
+            <input type="number" id="numCredits" value="1" min="1" max="" />
+        </span>
+        <br />
+        <!-- ko if: $root.settings.isAppDesigner -->
+        <br />
+        Transfer credits to Legic Connect or to the local reader?
+        <span class="dialog-confirm-span-right">
+            <input type="radio" name="iamtransfer" value="1" checked="checked" />Legic Connect
+            <input type="radio" name="iamtransfer" value="0" />Reader
+        </span>
+        <!-- /ko -->
+      </span>
+    </div>
+
+    <!-- mass production dialog -->
+    <div id="dialog-mass-production" title="Mass production of cards">
+      <form id="mass-production">
+        The data fields below require user input before a card can be created.<br />
+        <br />
+
+        <div>Please fill in the field below according to your requirements:</div>
+        <table width="100%">
+          <!-- ko if: DynamicFields().first && DynamicFields().first.list.length > 0 -->
+            <tr><td colspan="3"><hr /></td></tr>
+            <tr><td colspan="3"><span class="dialog-font-weight-bold">"Per series" settings:</span></td></tr>
+            <tr><th align="left">App Name</th><th align="left">Field Name</th><th align="left">Value</th></tr>
+          <tbody data-bind="foreach: { data: DynamicFields().first.list }">
+            <tr><td><span data-bind="text: SegmentName"></span></td><td><span data-bind="text: Name"></span></td>
+            <!-- ko if: Type === 'string' -->
+              <td><input type="text" data-bind="value: Value, enable: $root.MassProductionFirstRun, attr: { maxlength: Length, name: $root.GetInputFieldName(SegmentIndex, Index) }"/></td>
+            <!-- /ko -->
+            <!-- ko if: Type === 'binary' -->
+              <td><input type="text" data-bind="value: Value, enable: $root.MassProductionFirstRun, attr: { maxlength: (3*Length-1), name: $root.GetInputFieldName(SegmentIndex, Index) }" onkeyup="value=value.filterFormatHex()"/></td>
+            <!-- /ko -->
+            <!-- ko if: Type === 'bcd' -->
+              <td align="right"><input type="number" data-bind="value: Value, enable: $root.MassProductionFirstRun, attr: { min: 0, max: Math.pow(10,2*Length)-1, name: $root.GetInputFieldName(SegmentIndex, Index) }"/></td>
+            <!-- /ko -->
+            <!-- ko if: Type === 'number' -->
+              <td align="right"><input type="number" data-bind="value: Value, enable: $root.MassProductionFirstRun, attr: { min: 0, max: Math.pow(2,8*Length)-1, name: $root.GetInputFieldName(SegmentIndex, Index) }"/></td>
+            <!-- /ko -->
+            </tr>
+          </tbody>
+          <!-- /ko -->
+          <!-- ko if: DynamicFields().each && DynamicFields().each.list.length > 0 -->
+            <tr><td colspan="3"><hr /></td></tr>
+            <tr><td colspan="3"><span class="dialog-font-weight-bold">"Per card" settings:</span></td></tr>
+            <tr><th align="left">App</th><th align="left">Field</th><th align="left">Value</th></tr>
+            <tbody data-bind="foreach: { data: DynamicFields().each.list }">
+              <tr><td><span data-bind="text: SegmentName"></span></td>
+                <td><span data-bind="text: Name"></span></td>
+                <!-- ko if: Type === 'string' -->
+                  <td><input type="text" data-bind="value: Value, attr: { maxlength: Length, name: $root.GetInputFieldName(SegmentIndex, Index) }"/></td>
+                <!-- /ko -->
+                <!-- ko if: Type === 'binary' -->
+                  <td><input type="text" data-bind="value: Value, attr: { maxlength: (3*Length-1), size: (3*Length-1), name: $root.GetInputFieldName(SegmentIndex, Index) }" onkeyup="value=value.filterFormatHex()" /></td>
+                <!-- /ko -->
+                <!-- ko if: Type === 'bcd' -->
+                  <td align="right"><input type="number" data-bind="value: Value, attr: { min: 0, max: Math.pow(10,2*Length)-1, name: $root.GetInputFieldName(SegmentIndex, Index) }"/></td>
+                <!-- /ko -->
+                <!-- ko if: Type === 'number' -->
+                  <td align="right"><input type="number" data-bind="value: Value, attr: { min: 0, max: Math.pow(2,8*Length)-1, name: $root.GetInputFieldName(SegmentIndex, Index) }"/></td>
+                <!-- /ko -->
+              </tr>
+            </tbody>
+          <!-- /ko -->
+          <tr>
+            <td>
+              <audio id="soundSuccess" src="sounds/01success1.wav" />
+              <audio id="soundFailure" src="sounds/01fail1.wav" />
+            </td>
+            <td colspan="2" height="25">
+              <span id="mass-production-status"></span>
+            </td>
+          <tr>
+            <td colspan="3">
+              <input type="checkbox" data-bind="checked: $root.MassProductionAutoWriteCard"></input>
+                <span labelFor="autowrite">Auto-create card when new card is placed on reader</span>
+            </td>
+          </tr>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <!-- version check dialog -->
+    <div id="dialog-version-check" title="Version compatibility check">
+      <br />
+      LocalProxy version: <span id="dialog-version-check-lp"></span><br />
+      RemoteProxy version: <span id="dialog-version-check-rp"></span><br />
+      <br />
+      We recommend you to update your LocalProxy installation with the newest version found <a href='LocalProxy.msi'>here</a><br />
+      <br />
+      Severity: <span id="dialog-version-check-status"></span> 
+      <br />
+    </div>
+
+    <!-- delete confirmation dialog -->
+    <div id="dialog-delete-confirmation" title="Delete confirmation">
+      <br />
+        <span id="dialog-delete-confirmation-message"></span><br />
+    </div>
+
+    <!-- upload dialog -->
+    <div id="dialog-import" title="Import existing definition">
+      <form id="import-form" method="post" enctype="multipart/form-data">
+        <fieldset>
+          <div><label></label><span><input type="hidden" name="formtype" value="import"></input></span></div>
+          <div><label>Definition</label>
+            <span>
+              <!--
+              <input type="file" class="hidden" name="import-file" id="import-file" data-bind="event: { change: $root.metadata_import.SetUploadName() }"/>
+              <label for="import-file" id="import-file-text" style="text-overflow: ellipsis;">Please select file to upload...</label>
+              -->
+              <input type="file" name="import-file" id="import-file" />
+            </span>
+          </div>
+          <div><label>Icon</label>
+            <span>
+              <!--
+              <input type="file" class="hidden" name="import-icon" id="import-icon" data-bind="event: { change: $root.metadata_import.PreviewImage($element, -1) }" />
+              <label for="import-icon"><img id="import-icon-img" /></label>
+              -->
+              <input type="file" name="import-icon" id="import-icon" accept="image/png"
+                     data-bind="event: { change: $root.metadata_import.PreviewImage($element, -1) }"/>
+            </span>
+          </div>
+          <div><label></label><span><label for="import-icon"><img id="import-icon-img" /></label></span></div>
+          <div><label>Name</label><span><input type="text" name="import-name"></input></span></div>
+          <div><label>Company</label><span><input type="text" name="import-company"></input></span></div>
+          <!-- FIXME: use database as source -->
+          <!-- allow custom values -->
+          <div><label>Category</label><span>
+              <input type="text" list="categories" name="import-category"/>
+              <datalist id="categories">
+                <option>Access</option>
+                <option>Attendance</option>
+                <option>Biometric</option>
+                <option>Interflex</option>
+                <option>Kaba</option>
+                <option>Parking</option>
+              </datalist>
+              </span></div>
+          <div><label>Description</label><span><textarea type="text" name="import-description" cols="50" rows="6"></textarea></span></div>
+        </fieldset>
+      </form>
+    </div>
+
+    <!-- error dialog -->
+    <div id="dialog-error-box" title="An error occurred">
+      <span class="ui-icon ui-icon-alert dialog-confirm-span-left" ></span>
+      <span>
+        The following error(s) occurred:
+        <br />
+        <span id="dialog-error-data"></span>
+        <br />
+      </span>
+    </div>
+
+    <div id="notifications"></div>
+
+    <script type="text/javascript" src="libs/jquery-1.11.3.js"></script>
+    <script type="text/javascript">
+        var less = {
+            env: "development", // or "production"
+            async: false, // load imports async
+            fileAsync: false, // load imports async when in a page under a file protocol
+            poll: 2000, // when in watch mode, time in ms between polls
+            dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+            relativeUrls: false // whether to adjust url's to be relative if false, url's are already relative to the
+        };
+    </script>
+    <script type="text/javascript" src="libs/less.min.js"></script>
+    <script type="text/javascript">
+        // load minimized version by default
+        // ?debug=1 url parameter => load debug version (non-minimized)
+        // ?debug=2 url parameter => load non-joined files (original files)
+        (function() {
+            'use strict';
+
+            function GetURLParameter(sParam)
+            {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++) 
+                {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam) 
+                    {
+                        return sParameterName[1];
+                    }
+                }
+            }
+
+            var script = document.createElement('script');
+            var scriptVersion = 'min';
+            var debugOn = GetURLParameter("debug");
+            if (debugOn === '1') {
+                scriptVersion = 'debug';
+            }
+            if (debugOn === '2') {
+                script.src = "IDConnectLibUI/libs/idconnect/vendor/js/require-2.1.18.debug.js";
+                script.setAttribute('data-main', 'src/main_all');
+            } else {
+                script.src = "build/appdesigner-0.0.9." + scriptVersion + ".js";
+            }
+
+            // attach to DOM
+            script.onload = function () {
+                // do stuff with the script
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
+  </body>
+</html>
+
+
+Sep 25, 2015 6:30:46 PM com.gargoylesoftware.htmlunit.WebConsole error
+SCHWERWIEGEND: Problem in ControlCenter->GetCurrentUser
+Sep 25, 2015 6:30:46 PM com.gargoylesoftware.htmlunit.WebConsole error
+SCHWERWIEGEND: ({readyState:4.0, getResponseHeader:(function (key) { var match; if (state === 2) { if (!responseHeaders) { responseHeaders = {}; while ((match = rheaders.exec(responseHeadersString))) { responseHeaders[match[1].toLowerCase()] = match[2]; } } match = responseHeaders[key.toLowerCase()]; } return match == null ? null : match; }), getAllResponseHeaders:(function () { return state === 2 ? responseHeadersString : null; }), setRequestHeader:(function (name, value) { var lname = name.toLowerCase(); if (!state) { name = requestHeadersNames[lname] = requestHeadersNames[lname] || name; requestHeaders[name] = value; } return this; }), overrideMimeType:(function (type) { if (!state) { s.mimeType = type; } return this; }), statusCode:(function (map) { var code; if (map) { if (state < 2) { for (code in map) { statusCode[code] = [statusCode[code], map[code]]; } } else { jqXHR.always(map[jqXHR.status]); } } return this; }), abort:(function (statusText) { var finalText = statusText || strAbort; if (transport) { transport.abort(finalText); } done(0, finalText); return this; }), state:(function () { return state; }), always:(function () { deferred.done(arguments).fail(arguments); return this; }), then:(function () { var fns = arguments; return jQuery.Deferred(function (newDefer) { jQuery.each(tuples, function (i, tuple) { var fn = jQuery.isFunction(fns[i]) && fns[i]; deferred[tuple[1]](function () { var returned = fn && fn.apply(this, arguments); if (returned && jQuery.isFunction(returned.promise)) { returned.promise().done(newDefer.resolve).fail(newDefer.reject).progress(newDefer.notify); } else { newDefer[tuple[0] + "With"](this === promise ? newDefer.promise() : this, fn ? [returned] : arguments); } }); }); fns = null; }).promise(); }), promise:(function (obj) { return obj != null ? jQuery.extend(obj, promise) : promise; }), pipe:(function () { var fns = arguments; return jQuery.Deferred(function (newDefer) { jQuery.each(tuples, function (i, tuple) { var fn = jQuery.isFunction(fns[i]) && fns[i]; deferred[tuple[1]](function () { var returned = fn && fn.apply(this, arguments); if (returned && jQuery.isFunction(returned.promise)) { returned.promise().done(newDefer.resolve).fail(newDefer.reject).progress(newDefer.notify); } else { newDefer[tuple[0] + "With"](this === promise ? newDefer.promise() : this, fn ? [returned] : arguments); } }); }); fns = null; }).promise(); }), done:(function () { if (list) { var start = list.length; (function add(args) { jQuery.each(args, function (_, arg) { var type = jQuery.type(arg); if (type === "function") { if (!options.unique || !self.has(arg)) { list.push(arg); } } else { if (arg && arg.length && type !== "string") { add(arg); } } }); })(arguments); if (firing) { firingLength = list.length; } else { if (memory) { firingStart = start; fire(memory); } } } return this; }), fail:(function () { if (list) { var start = list.length; (function add(args) { jQuery.each(args, function (_, arg) { var type = jQuery.type(arg); if (type === "function") { if (!options.unique || !self.has(arg)) { list.push(arg); } } else { if (arg && arg.length && type !== "string") { add(arg); } } }); })(arguments); if (firing) { firingLength = list.length; } else { if (memory) { firingStart = start; fire(memory); } } } return this; }), progress:(function () { if (list) { var start = list.length; (function add(args) { jQuery.each(args, function (_, arg) { var type = jQuery.type(arg); if (type === "function") { if (!options.unique || !self.has(arg)) { list.push(arg); } } else { if (arg && arg.length && type !== "string") { add(arg); } } }); })(arguments); if (firing) { firingLength = list.length; } else { if (memory) { firingStart = start; fire(memory); } } } return this; }), complete:(function () { if (list) { var start = list.length; (function add(args) { jQuery.each(args, function (_, arg) { var type = jQuery.type(arg); if (type === "function") { if (!options.unique || !self.has(arg)) { list.push(arg); } } else { if (arg && arg.length && type !== "string") { add(arg); } } }); })(arguments); if (firing) { firingLength = list.length; } else { if (memory) { firingStart = start; fire(memory); } } } return this; }), success:(function () { if (list) { var start = list.length; (function add(args) { jQuery.each(args, function (_, arg) { var type = jQuery.type(arg); if (type === "function") { if (!options.unique || !self.has(arg)) { list.push(arg); } } else { if (arg && arg.length && type !== "string") { add(arg); } } }); })(arguments); if (firing) { firingLength = list.length; } else { if (memory) { firingStart = start; fire(memory); } } } return this; }), error:(function () { if (list) { var start = list.length; (function add(args) { jQuery.each(args, function (_, arg) { var type = jQuery.type(arg); if (type === "function") { if (!options.unique || !self.has(arg)) { list.push(arg); } } else { if (arg && arg.length && type !== "string") { add(arg); } } }); })(arguments); if (firing) { firingLength = list.length; } else { if (memory) { firingStart = start; fire(memory); } } } return this; }), responseText:"<html>\r\n<head><title>401 Authorization Required</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>401 Authorization Required</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n", status:401, statusText:Unauthorized})
+Sep 25, 2015 6:30:46 PM com.gargoylesoftware.htmlunit.WebClient loadDownloadedResponses
+INFORMATION: No usage of download: com.gargoylesoftware.htmlunit.WebClient$LoadJob@49966c8
+Set Response Code(HTTP/1.1 200 OK) in https://staging.identitycloud.ch/appdesigner/
+automatedTestUser1443181506566
+51019
+Time: 8 Seconds
