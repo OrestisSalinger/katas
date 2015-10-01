@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -70,7 +71,7 @@ public class HttpUrlServerConnection {
         URL url = new URL(server.getUrl());
         conn = url.openConnection();
         conn.setConnectTimeout(30000);
-        if (!server.getUsername().equals("--") && !server.getPassword().equals("--")) {
+        if (!server.getPassword().equals("--")) {
           prepareLoginSession(server.getUsername(), server.getPassword(), conn);
         }
         setResponseValuesInServer(server, conn);
@@ -126,14 +127,30 @@ public class HttpUrlServerConnection {
       String user_pass = username + ":" + password;
       String encoded = Base64.getEncoder().encodeToString(user_pass.getBytes());
       webClient.addRequestHeader("Authorization", "Basic " + encoded);
-//      setLogging(webClient);
+      setLogging(webClient);
       HtmlPage page = webClient.getPage(server.getUrl());
-      AjaxController a = new AjaxController();
-      a.processSynchron(page,new WebRequest(new URL(server.getUrl())), true);
+//      AjaxController a = new AjaxController();
+//      a.processSynchron(page,new WebRequest(new URL(server.getUrl())), true);
 
       webClient.waitForBackgroundJavaScript(MS_WAIT_FOR_BACKGROUND_SCRIPT);
       CancellingJavaScriptErrorListener js = (CancellingJavaScriptErrorListener) webClient.getJavaScriptErrorListener();
-      final int errorCount = js.errorCount;
+      for (int i = 0; i < 10; i++) {
+        List<?> hd = page.getByXPath("/html/body/div/div/div/div[1]");
+        System.out.println(i + " HTML: " + hd.size());
+          try {
+            synchronized (page) {
+              page.wait(500);
+            }
+          } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        
+      }
+      int errorCount = 0;
+        errorCount = js.errorCount;
+      
       server.setResponseCode(page.getWebResponse().getStatusMessage());
       server.setResponseHeaders(page.getWebResponse().getResponseHeaders());
       server.setResponseHtml(page.getWebResponse().getContentAsString());
