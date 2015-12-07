@@ -46,8 +46,8 @@ public class TestAllEnvironmentsResponseCode {
   public ExpectedException exception = ExpectedException.none();
 
   private static final String PATH = "src/test/resources/";
-  private static final String FILENAME_TEST = "ConnectServers.csv";
-  private static final String FILENAME_CREDENTIALS = "ConnectServersCredentials.csv";
+  private static final String FILENAME_TEST = "servers.csv";
+  private static final String FILENAME_CREDENTIALS = "servers.csv";
 
   @Test
   public void handleRequests_allEnvironments_responseIsOK() throws Exception {
