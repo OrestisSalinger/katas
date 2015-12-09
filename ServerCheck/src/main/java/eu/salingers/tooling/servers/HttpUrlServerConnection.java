@@ -64,10 +64,26 @@ public class HttpUrlServerConnection {
   }
 
   public Server setResponseInServer(Server server) {
+    System.out.println("is JS enabled: " + server.isJavascriptEnabled());
+    System.out.println("is JS enabled: " + server.getUsername());
+    System.out.println("is JS enabled: " + server.getPassword());
+    System.out.println("is JS enabled: " + server.getDoLogin());
+
+    
+    
     if (server.isJavascriptEnabled() && !server.getPassword().equals("--")) {
       getPageByHtmlUnitLogin(server);
     } else {
-      // TODO sal: Ref conn to Optional<URLConnection>
+      
+//    TODO sal: Refactor conn to Optional<URLConnection>
+//      This needs to be:
+//      if js == true && pw,user != -- 
+//        then getPageByHtmlUnitLogin
+      
+      
+      
+      
+      
       URLConnection conn = null;
       try {
         URL url = new URL(server.getUrl());
@@ -104,6 +120,7 @@ public class HttpUrlServerConnection {
   }
 
   private static String getHtmlFromLoginSession(URLConnection conn) throws IOException {
+    System.out.println("Entering getHtmlFromLoginSession");
     StringBuffer sb = new StringBuffer();
     try (BufferedReader input = new BufferedReader(new InputStreamReader(conn.getInputStream()));) {
       String line = "";

@@ -34,7 +34,7 @@ public class ServerRequestHandler {
           }
       });
     } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
+      // Intentionally swallowed.
       e.printStackTrace();
     }finally{
       executor.shutdown();

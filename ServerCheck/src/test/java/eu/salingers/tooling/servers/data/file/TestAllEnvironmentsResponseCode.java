@@ -2,6 +2,7 @@ package eu.salingers.tooling.servers.data.file;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.IOException;
@@ -32,10 +33,13 @@ import eu.salingers.tooling.servers.model.servers.Server;
 //@RunWith(Theories.class)
 public class TestAllEnvironmentsResponseCode {
   private static final String PROOF_NOT_LOGGED_IN = "login.js";
-  private static final int NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS = 1;
   private static final String WRONG_CHARACTER = "_";
+  private static final int NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS = 4;
+  private static final String PATH = "src/test/resources/";
+  private static final String FILENAME_NO_CREDENTIALS = "ConnectServersNoCredentials.csv";
+  private static final String FILENAME_CREDENTIALS = "ConnectServersCredentials.csv";
+  private static final String PROOF_LOGGED_IN = "Logout";
   private static String WRONG_CHARACTERS = "";
-
   static {
     for (int i = 0; i < NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS; i++) {
       WRONG_CHARACTERS = new StringBuilder(WRONG_CHARACTERS).append(WRONG_CHARACTER).toString();
@@ -45,13 +49,9 @@ public class TestAllEnvironmentsResponseCode {
   @Rule
   public ExpectedException exception = ExpectedException.none();
 
-  private static final String PATH = "src/test/resources/";
-  private static final String FILENAME_TEST = "servers.csv";
-  private static final String FILENAME_CREDENTIALS = "servers.csv";
-
   @Test
-  public void handleRequests_allEnvironments_responseIsOK() throws Exception {
-    List<Server> servers = createServerListFromFile(FILENAME_TEST);
+  public void handleRequests_allEnvironments_responseIs200OK() throws Exception {
+    List<Server> servers = createServerListFromFile(FILENAME_NO_CREDENTIALS);
 
     handleRequestsForServers(servers);
 
@@ -59,25 +59,43 @@ public class TestAllEnvironmentsResponseCode {
   }
 
   @Test
+  public void handleRequests_correctCredentialsForAllEnvironments_logInGrantedOnAllEnvironments() throws Exception {
+    List<Server> servers = createServerListFromFile(FILENAME_CREDENTIALS);
+
+    handleRequestsForServers(servers);
+
+    //See that it I get a Login here
+  servers.stream().forEach(e -> {
+    final String responseHtml = e.getResponseHtml();
+    System.out.println("Correct Login " + e.getPassword());
+    System.out.println(e.getUrl());
+    System.out.println(e.getResponseHtml());
+    assertThat(responseHtml, containsString(PROOF_LOGGED_IN));
+  });
+  }
+  
+  @Test
   public void handleRequests_wrongCredentials_loginIsBlocked() throws Exception {
     final List<Server> servers = createServerListFromFile(FILENAME_CREDENTIALS);
     addWrongCharactersToPassword(servers);
     
     for (int i = 0; i <= NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS; i++) {
       tryLoginToServers(servers, i);
-      if (isNotLastIteration(i)) {
+//      if (isNotLastIteration(i)) {
         // Except the last iteration no log-in must be granted because of wrong
         // credentials.
         servers.stream().forEach(e -> assertThat(e.getResponseHtml(), containsString(PROOF_NOT_LOGGED_IN)));
-      }else{
-        servers.stream().forEach(e -> {
-          final String responseHtml = e.getResponseHtml();
-          System.out.println("Correct Login " + e.getPassword());
-          System.out.println(e.getUrl());
-          System.out.println(e.getResponseHtml());
-          assertThat(responseHtml, containsString(PROOF_NOT_LOGGED_IN));
-        });
-      }
+//      }else{
+        
+        //See that it I get a Login here
+//        servers.stream().forEach(e -> {
+//          final String responseHtml = e.getResponseHtml();
+//          System.out.println("Correct Login " + e.getPassword());
+//          System.out.println(e.getUrl());
+//          System.out.println(e.getResponseHtml());
+//          assertThat(responseHtml, containsString(PROOF_NOT_LOGGED_IN));
+//        });
+//      }
     }
     // We're now collecting all servers that were logged-in from the last
     // round. This list must be empty.
@@ -92,6 +110,14 @@ public class TestAllEnvironmentsResponseCode {
 
   }
 
+  
+  
+  
+  
+  
+  
+  
+  
   private void tryLoginToServers(final List<Server> servers, int i) throws Exception {
     final int j = i;
     servers.stream().map(e -> {
@@ -124,18 +150,17 @@ public class TestAllEnvironmentsResponseCode {
   }
   
   private void handleRequestsForServers(List<Server> servers) throws Exception {
-    ServerRequestHandler handler = new ServerRequestHandler(servers);
-    handler.handleRequests();
+    new ServerRequestHandler(servers).handleRequests();
   }
 
-  @SuppressWarnings("unused")
-  private List<Server> createServerListFromFile() {
-    final List<String[]> readRecords = createCSVReader().readRecords();
-    // readRecords.stream().map(e ->
-    // Arrays.toString(e)).forEach(System.out::println);
-    List<Server> servers = ServerListMapper.createList(readRecords);
-    return servers;
-  }
+//  @SuppressWarnings("unused")
+//  private List<Server> createServerListFromFile() {
+//    final List<String[]> readRecords = createCSVReader().readRecords();
+//    // readRecords.stream().map(e ->
+//    // Arrays.toString(e)).forEach(System.out::println);
+//    List<Server> servers = ServerListMapper.createList(readRecords);
+//    return servers;
+//  }
 
   private List<Server> createServerListFromFile(String file) {
     final List<String[]> readRecords = createCSVReader(file).readRecords();
@@ -145,13 +170,13 @@ public class TestAllEnvironmentsResponseCode {
     return servers;
   }
 
-  private CSVReader createCSVReader() {
-    try {
-      return new CSVReader(createReader(PATH, FILENAME_TEST));
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
+//  private CSVReader createCSVReader() {
+//    try {
+//      return new CSVReader(createReader(PATH, FILENAME_TEST));
+//    } catch (IOException e) {
+//      throw new UncheckedIOException(e);
+//    }
+//  }
 
   private CSVReader createCSVReader(String file) {
     try {

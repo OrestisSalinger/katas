@@ -24,7 +24,9 @@ public class ServerListMapper {
     for (int i = 0; i < rawList.size(); i++) {
       String[] array = rawList.get(i)[0].split(",");
       final Server server = new Server(array[0], array[1], array[2]);
-      server.setJavascriptEnabled(array[3].contains("true") ? true : false);
+      if(array[3] != null){ 
+        server.setJavascriptEnabled(array[3].contains("true"));
+      }
       servers.add(server);
     }
     return servers;
