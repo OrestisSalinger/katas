@@ -1,4 +1,4 @@
-package eu.salingers.tooling.servers.data.file;
+package eu.salingers.tooling.servers;
 
 import java.io.IOException;
 import java.util.Arrays;

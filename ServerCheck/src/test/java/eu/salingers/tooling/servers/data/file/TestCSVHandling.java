@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import eu.salingers.tooling.servers.ServerListMapper;
 import eu.salingers.tooling.servers.ServerRequestHandler;
+import eu.salingers.tooling.servers.TestServers;
 import eu.salingers.tooling.servers.model.servers.Server;
 import eu.salingers.tooling.servers.model.servers.Servers;
 

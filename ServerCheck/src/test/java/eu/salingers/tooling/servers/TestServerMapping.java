@@ -1,4 +1,4 @@
-package eu.salingers.tooling.servers.data.file;
+package eu.salingers.tooling.servers;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

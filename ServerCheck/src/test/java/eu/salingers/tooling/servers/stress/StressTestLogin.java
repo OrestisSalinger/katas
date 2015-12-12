@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import eu.salingers.tooling.servers.data.file.TestServers;
+import eu.salingers.tooling.servers.TestServers;
 import eu.salingers.tooling.servers.model.servers.Server;
 
 public class StressTestLogin extends TestServers {

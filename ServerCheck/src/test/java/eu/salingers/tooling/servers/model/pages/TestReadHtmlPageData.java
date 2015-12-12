@@ -1,4 +1,4 @@
-package eu.salingers.tooling.servers.data.file;
+package eu.salingers.tooling.servers.model.pages;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -21,6 +21,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.salingers.tooling.servers.ServerListMapper;
+import eu.salingers.tooling.servers.TestServers;
+import eu.salingers.tooling.servers.data.file.HtmlReader;
 import eu.salingers.tooling.servers.model.servers.Server;
 
 //@RunWith(Theories.class)

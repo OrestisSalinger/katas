@@ -1,9 +1,6 @@
-package eu.salingers.tooling.servers;
+package eu.salingers.tooling.servers.model.pages;
 
 import java.util.List;
-
-import eu.salingers.tooling.servers.model.pages.Page;
-import eu.salingers.tooling.servers.model.pages.WorkView;
 
 public class PageHandler {
 

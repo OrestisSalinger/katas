@@ -1,4 +1,4 @@
-package eu.salingers.tooling.servers.data.file;
+package eu.salingers.tooling.servers;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -18,6 +18,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import eu.salingers.tooling.servers.ServerListMapper;
 import eu.salingers.tooling.servers.ServerRequestHandler;
+import eu.salingers.tooling.servers.data.file.CSVReader;
 import eu.salingers.tooling.servers.model.servers.Server;
 import eu.salingers.tooling.servers.model.servers.Servers;
 

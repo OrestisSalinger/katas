@@ -1,4 +1,4 @@
-package eu.salingers.tooling.servers;
+package eu.salingers.tooling.servers.model.pages;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import eu.salingers.tooling.servers.data.file.TestServers;
+import eu.salingers.tooling.servers.TestServers;
 import eu.salingers.tooling.servers.model.pages.WorkView;
 import eu.salingers.tooling.servers.model.servers.Server;
 import eu.salingers.tooling.servers.notify.EmailNotifier;
