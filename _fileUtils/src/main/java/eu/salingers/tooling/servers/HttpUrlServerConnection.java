@@ -12,29 +12,31 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.JavaScriptPage;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
-import eu.salingers.tooling.servers.model.Server;
+import eu.salingers.tooling.servers.model.pages.Page;
+import eu.salingers.tooling.servers.model.servers.Server;
 
 public class HttpUrlServerConnection {
 
-  private static final int MS_WAIT_FOR_BACKGROUND_SCRIPT = 10_000;
+  private static final int NUMBER_OF_TRIALS = 10;
+  private static final int MS_WAIT_FOR_BACKGROUND_SCRIPT = 60_000;
 
   public Map<String, String> getHttpResponseCodesWithLogin(List<Server> servers) {
     Map<String, String> responseCodes = new HashMap<>();
-//    TODO: ref to stream
+    // TODO: ref to stream
     for (Server s : servers) {
       responseCodes.put(s.getUrl(), getResponseCode(s.getUrl(), s.getUsername(), s.getPassword()));
     }
@@ -62,10 +64,10 @@ public class HttpUrlServerConnection {
   }
 
   public Server setResponseInServer(Server server) {
-    if (server.isJavascriptEnabled()) {
+    if (server.isJavascriptEnabled() && !server.getPassword().equals("--")) {
       getPageByHtmlUnitLogin(server);
     } else {
-//      TODO sal: Ref conn to Optional<URLConnection>
+      // TODO sal: Ref conn to Optional<URLConnection>
       URLConnection conn = null;
       try {
         URL url = new URL(server.getUrl());
@@ -85,7 +87,8 @@ public class HttpUrlServerConnection {
   }
 
   private void setResponseValuesInServer(final Server server, final URLConnection conn) throws IOException {
-    // TODO in server handler: get the call method as a parameter(IF Predicate). Should not know the model here.
+    // TODO in server handler: get the call method as a parameter(IF Predicate).
+    // Should not know the model here.
     server.setResponseCode(conn.getHeaderField(null));
     List<NameValuePair> nvps = new ArrayList<>();
     final Map<String, List<String>> headerFields = conn.getHeaderFields();
@@ -112,51 +115,11 @@ public class HttpUrlServerConnection {
     return sb.toString();
   }
 
-  private static void getPageByHtmlUnitLogin(Server server){
-
+  private static void getPageByHtmlUnitLogin(Server server) {
     try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38);) {
-      webClient.getOptions().setJavaScriptEnabled(true);
-      webClient.getOptions().setCssEnabled(false);
-      webClient.getOptions().setUseInsecureSSL(true);
-      webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-      webClient.getOptions().setThrowExceptionOnScriptError(false);
-      webClient.setAjaxController(new NicelyResynchronizingAjaxController());
-      webClient.getCookieManager().setCookiesEnabled(true);
-      final String username = server.getUsername();
-      final String password = server.getPassword();
-      String user_pass = username + ":" + password;
-      String encoded = Base64.getEncoder().encodeToString(user_pass.getBytes());
-      webClient.addRequestHeader("Authorization", "Basic " + encoded);
-      setLogging(webClient);
-      HtmlPage page = webClient.getPage(server.getUrl());
-//      AjaxController a = new AjaxController();
-//      a.processSynchron(page,new WebRequest(new URL(server.getUrl())), true);
+      setupWebClient(webClient, server);
+      setResponseData(server, webClient);
 
-      webClient.waitForBackgroundJavaScript(MS_WAIT_FOR_BACKGROUND_SCRIPT);
-      CancellingJavaScriptErrorListener js = (CancellingJavaScriptErrorListener) webClient.getJavaScriptErrorListener();
-      for (int i = 0; i < 10; i++) {
-        List<?> hd = page.getByXPath("/html/body/div/div/div/div[1]");
-        System.out.println(i + " HTML: " + hd.size());
-          try {
-            synchronized (page) {
-              page.wait(500);
-            }
-          } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-        
-      }
-      int errorCount = 0;
-        errorCount = js.errorCount;
-      
-      server.setResponseCode(page.getWebResponse().getStatusMessage());
-      server.setResponseHeaders(page.getWebResponse().getResponseHeaders());
-      server.setResponseHtml(page.getWebResponse().getContentAsString());
-      if (errorCount > 2) {
-        server.setException("A Backgrund Script Is Reloading Infinitely");
-      }
       webClient.close();
     } catch (FailingHttpStatusCodeException e) {
       // TODO Auto-generated catch block
@@ -168,9 +131,76 @@ public class HttpUrlServerConnection {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    // AjaxController a = new AjaxController();
+    // a.processSynchron(page,new WebRequest(new URL(server.getUrl())), true);
   }
 
-  private static void setLogging(WebClient webClient) {
+  private static void setResponseData(Server server, final WebClient webClient) throws IOException, MalformedURLException {
+    HtmlPage page = webClient.getPage(server.getUrl());
+    HtmlDivision htmlDivision = null;  
+     System.out.println("Setting Response Data");
+    
+    for (int i = 0; i < NUMBER_OF_TRIALS; i++) {
+      List<?> containerResult = page.getByXPath(server.getRequestPages().get(0).getContainer());
+      htmlDivision = (HtmlDivision) containerResult.get(0);
+//      server.setResponseHtml(htmlDivision.get().asXml());
+      final String asXml = htmlDivision.asXml();
+      System.out.println(i + " asXml " + asXml);
+      if (asXml.isEmpty() || asXml.contains("loading")) {
+        System.out.println("Waiting " + i + " " + asXml);
+        synchronized (page) {
+          try {
+            page.wait(500);
+          } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+      } else {
+        break;
+
+      }
+//      System.out.println(i + " div: " + htmlDivision.asText());
+    }
+    Page responsePage = new Page();
+    responsePage.setDiv(htmlDivision);
+    server.addResponsePage(responsePage);
+    server.setResponseCode(page.getWebResponse().getStatusMessage());
+    server.setResponseHeaders(page.getWebResponse().getResponseHeaders());
+    setJSExceptionsInServer(server, (CancellingJavaScriptErrorListener) webClient.getJavaScriptErrorListener());
+  }
+
+  private static void setJSExceptionsInServer(Server server, CancellingJavaScriptErrorListener js) {
+    int errorCount = 0;
+    errorCount = js.errorCount;
+    if (errorCount > 2) {
+      server.setException("A Backgrund Script Is Reloading Infinitely");
+    }
+  }
+
+  private static void setAuthorizationRequestHeader(Server server, final WebClient webClient) {
+    final String username = server.getUsername();
+    final String password = server.getPassword();
+    String user_pass = username + ":" + password;
+    String encoded = Base64.getEncoder().encodeToString(user_pass.getBytes());
+    webClient.addRequestHeader("Authorization", "Basic " + encoded);
+  }
+
+  private static void setupWebClient(final WebClient webClient, Server server) {
+    webClient.getOptions().setJavaScriptEnabled(true);
+    webClient.getOptions().setCssEnabled(false);
+    webClient.getOptions().setUseInsecureSSL(true);
+    webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+    webClient.getOptions().setThrowExceptionOnScriptError(false);
+    webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+    webClient.getCookieManager().setCookiesEnabled(true);
+    webClient.waitForBackgroundJavaScript(MS_WAIT_FOR_BACKGROUND_SCRIPT);
+    setLoggingOffAddListener(webClient);
+    setAuthorizationRequestHeader(server, webClient);
+
+  }
+
+  private static void setLoggingOffAddListener(WebClient webClient) {
     LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
     java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
     java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);

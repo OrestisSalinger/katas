@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import eu.salingers.tooling.servers.model.Server;
+import eu.salingers.tooling.servers.model.servers.Server;
 
 public class ServerRequestHandler {
   List<Server> servers;
@@ -18,7 +18,7 @@ public class ServerRequestHandler {
     this.servers = servers;
   }
 
-  public List<Server> handleRequests() throws Exception{
+  public List<Server> handleRequests(){
     HttpUrlServerConnection connection = new HttpUrlServerConnection();
     ExecutorService executor = Executors.newWorkStealingPool();
     List<Callable<Server>> callables = createCalls(connection);

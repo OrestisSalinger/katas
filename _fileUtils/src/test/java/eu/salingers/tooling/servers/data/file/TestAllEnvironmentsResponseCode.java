@@ -27,12 +27,12 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import eu.salingers.tooling.servers.ServerListMapper;
 import eu.salingers.tooling.servers.ServerRequestHandler;
-import eu.salingers.tooling.servers.model.Server;
+import eu.salingers.tooling.servers.model.servers.Server;
 
 //@RunWith(Theories.class)
 public class TestAllEnvironmentsResponseCode {
   private static final String PROOF_NOT_LOGGED_IN = "login.js";
-  private static final int NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS = 3;
+  private static final int NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS = 1;
   private static final String WRONG_CHARACTER = "_";
   private static String WRONG_CHARACTERS = "";
 
@@ -47,20 +47,20 @@ public class TestAllEnvironmentsResponseCode {
 
   private static final String PATH = "src/test/resources/";
   private static final String FILENAME_TEST = "ConnectServers.csv";
-  private static final String FILENAME_WC = "ConnectServersWrongCredentials.csv";
+  private static final String FILENAME_CREDENTIALS = "ConnectServersCredentials.csv";
 
   @Test
   public void handleRequests_allEnvironments_responseIsOK() throws Exception {
-    List<Server> servers = createServerListFromFile(FILENAME_WC);
+    List<Server> servers = createServerListFromFile(FILENAME_TEST);
 
     handleRequestsForServers(servers);
 
-    servers.stream().forEach(e -> assertThat(e.getResponseCode(), containsString("OK")));
+    servers.stream().forEach(e -> assertThat(e.getResponseCode(), containsString("200 OK")));
   }
 
   @Test
   public void handleRequests_wrongCredentials_loginIsBlocked() throws Exception {
-    final List<Server> servers = createServerListFromFile(FILENAME_WC);
+    final List<Server> servers = createServerListFromFile(FILENAME_CREDENTIALS);
     addWrongCharactersToPassword(servers);
     
     for (int i = 0; i <= NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS; i++) {
@@ -69,6 +69,14 @@ public class TestAllEnvironmentsResponseCode {
         // Except the last iteration no log-in must be granted because of wrong
         // credentials.
         servers.stream().forEach(e -> assertThat(e.getResponseHtml(), containsString(PROOF_NOT_LOGGED_IN)));
+      }else{
+        servers.stream().forEach(e -> {
+          final String responseHtml = e.getResponseHtml();
+          System.out.println("Correct Login " + e.getPassword());
+          System.out.println(e.getUrl());
+          System.out.println(e.getResponseHtml());
+          assertThat(responseHtml, containsString(PROOF_NOT_LOGGED_IN));
+        });
       }
     }
     // We're now collecting all servers that were logged-in from the last
@@ -103,20 +111,16 @@ public class TestAllEnvironmentsResponseCode {
   private boolean isNotLastIteration(int i) {
     return i < WRONG_CHARACTERS.length();
   }
-
-  private void removeOneWrongCharacterFromUserNames(final List<Server> servers) {
-    servers.stream().forEach(e -> e.setUsername(e.getUsername().replaceFirst(WRONG_CHARACTER, "")));
-  }
   
   private void removeOneWrongCharacterFromPasswords(final List<Server> servers) {
-    servers.stream().forEach(e -> e.setPassword(e.getPassword().replaceFirst(WRONG_CHARACTER, "")));
+    servers.stream().forEach(e -> {
+      final String replaceFirst = e.getPassword().replaceFirst(WRONG_CHARACTER, "");
+      System.out.println("Replacing: " + e.getPassword() + " with " + replaceFirst);
+      e.setPassword(replaceFirst);
+    });
   }
   private void addWrongCharactersToPassword(List<Server> servers) {
     servers.stream().forEach(e -> e.setPassword(e.getPassword() + WRONG_CHARACTERS));
-  }
-
-  private void addWrongCharactersToUsername(List<Server> servers) {
-    servers.stream().forEach(e -> e.setUsername(e.getUsername() + WRONG_CHARACTERS));
   }
   
   private void handleRequestsForServers(List<Server> servers) throws Exception {
@@ -135,8 +139,8 @@ public class TestAllEnvironmentsResponseCode {
 
   private List<Server> createServerListFromFile(String file) {
     final List<String[]> readRecords = createCSVReader(file).readRecords();
-    // readRecords.stream().map(e ->
-    // Arrays.toString(e)).forEach(System.out::println);
+     readRecords.stream().map(e ->
+     Arrays.toString(e)).forEach(System.out::println);
     List<Server> servers = ServerListMapper.createList(readRecords);
     return servers;
   }

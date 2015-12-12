@@ -11,10 +11,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 //import org.junit.experimental.theories.Theories;
 //import org.junit.runner.RunWith;
@@ -24,8 +24,7 @@ import org.junit.rules.ExpectedException;
 
 import eu.salingers.tooling.servers.ServerListMapper;
 import eu.salingers.tooling.servers.ServerRequestHandler;
-import eu.salingers.tooling.servers.model.Server;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import eu.salingers.tooling.servers.model.servers.Server;
 
 //@RunWith(Theories.class)
 public class TestCSVHandling {
@@ -73,7 +72,7 @@ public class TestCSVHandling {
   }
 //  Proves that appdesigner loads infinitely when user has only login right  "AD"
 //  Must run alone. Will be removed when AD has been fixed.
-//  @Ignore 
+  @Ignore 
   @Test
   public void handleRequests_fileDataOneFileInfinitelyLoading_exceptionInServer() throws Exception {
     List<Server> servers = createServerListFromFile();

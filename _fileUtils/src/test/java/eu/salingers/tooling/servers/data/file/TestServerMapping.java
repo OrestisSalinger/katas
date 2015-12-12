@@ -10,10 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import eu.salingers.tooling.servers.ServerListMapper;
-//import org.junit.experimental.theories.Theories;
-//import org.junit.runner.RunWith;
-//import static org.junit.Assert.*;
-import eu.salingers.tooling.servers.model.Server;
+import eu.salingers.tooling.servers.model.servers.Server;
 
 public class TestServerMapping {
   private final String[] ARRAY1 = {"https://staging.identitycloud.ch/controlcenter, test123 ,Test_123456,false"}; 
