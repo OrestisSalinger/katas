@@ -1,0 +1,4 @@
+url;username;password
+https://staging.identitycloud.ch/controlcenter/,osaTestUserJule,Test_123456,false
+https://staging.identitycloud.ch/iddirect/,osaTestUserJule,Test_123456,false
+https://staging.identitycloud.ch/appdesigner/,osaTestUserJule,@Test_123456$,true
