@@ -11,10 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import eu.salingers.tooling.servers.data.file.TestServers;
 import eu.salingers.tooling.servers.model.pages.WorkView;
 import eu.salingers.tooling.servers.model.servers.Server;
+import eu.salingers.tooling.servers.notify.EmailNotifier;
+import eu.salingers.tooling.servers.notify.Emailer;
 
-public class TestPageHandling {
+public class TestPageHandling extends TestServers {
   
   
   
@@ -23,7 +26,7 @@ public class TestPageHandling {
   
   @Before
   public void getJSServerObject(){
-     server = new Server("https://staging.identitycloud.ch/iddirect", "osaTestUserJule", "Test_123456");
+     server = new Server("https://staging.identitycloud.ch/iddirect", new EmailNotifier(), false, "osaTestUserJule", "Test_123456");
      server.setJavascriptEnabled(Boolean.TRUE);
      
   }

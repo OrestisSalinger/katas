@@ -65,13 +65,12 @@ public class HttpUrlServerConnection {
 
   public Server setResponseInServer(Server server) {
     System.out.println("is JS enabled: " + server.isJavascriptEnabled());
-    System.out.println("is JS enabled: " + server.getUsername());
-    System.out.println("is JS enabled: " + server.getPassword());
-    System.out.println("is JS enabled: " + server.getDoLogin());
-
-    
+    System.out.println("Username: " + server.getUsername());
+    System.out.println("Password: " + server.getPassword());
+    System.out.println("Login: " + server.getDoLogin());
     
     if (server.isJavascriptEnabled() && !server.getPassword().equals("--")) {
+      System.err.println("JS is enabled!!!");
       getPageByHtmlUnitLogin(server);
     } else {
       
@@ -80,7 +79,7 @@ public class HttpUrlServerConnection {
 //      if js == true && pw,user != -- 
 //        then getPageByHtmlUnitLogin
       
-      
+      System.err.println("JS is NOT enabled!!!");
       
       
       
@@ -120,7 +119,7 @@ public class HttpUrlServerConnection {
   }
 
   private static String getHtmlFromLoginSession(URLConnection conn) throws IOException {
-    System.out.println("Entering getHtmlFromLoginSession");
+//    System.out.println("Entering getHtmlFromLoginSession");
     StringBuffer sb = new StringBuffer();
     try (BufferedReader input = new BufferedReader(new InputStreamReader(conn.getInputStream()));) {
       String line = "";

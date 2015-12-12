@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -17,14 +18,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import eu.salingers.tooling.servers.HttpUrlServerConnection;
 import eu.salingers.tooling.servers.model.pages.Page;
 import eu.salingers.tooling.servers.model.servers.Server;
+import eu.salingers.tooling.servers.notify.EmailNotifier;
 
-public class TestRequestHandling {
+public class TestRequestHandling extends TestServers {
   public Server server;
   public Page page;
   
   @Before
   public void getJSServerObject() {
-    server = new Server("https://staging.identitycloud.ch/iddirect", "osaTestUserJule", "Test_123456");
+    
+    server = new Server("https://staging.identitycloud.ch/iddirect",new EmailNotifier(), true, "osaTestUserJule", "Test_123456");
     server.setJavascriptEnabled(Boolean.TRUE);
     page = new Page();
     page.setContainer("/html/body/div/div/div/div[2]/div/div[4]/div[2]");
@@ -78,7 +81,30 @@ public class TestRequestHandling {
   
   
   
-  
+//Proves that appdesigner loads infinitely when user has only login right  "AD"
+//Must run alone. Will be removed when AD has been fixed.
+//@Ignore 
+//@Test
+//public void handleRequests_fileDataOneFileInfinitelyLoading_exceptionInServer() throws Exception {
+//  List<Server> servers = createServerListFromFile();
+//
+//  handleRequestsForServers(servers);
+//
+//  exception.expect(java.lang.AssertionError.class);
+//  exception.expectMessage("A Backgrund Script Is Reloading Infinitely");
+//  servers.stream().forEach(e -> assertThat(e.getException(), equalTo("")));
+//}
+//
+//@Test
+//public void handleRequests_fileDataOneFileInfinitelyLoading_responseIsOK() throws Exception {
+//  List<Server> servers = createServerListFromFile();
+//  
+//  handleRequestsForServers(servers);
+//  
+//  servers.stream().forEach(e -> assertThat(e.getResponseCode(), containsString("OK")));
+//}
+
+
   
   
   

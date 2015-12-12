@@ -13,7 +13,7 @@ public class Server {
 
   private String exception = "";
   private boolean isJavascriptEnabled;
-  private Notifier notifier;
+  private Notifier notifier = new EmailNotifier();
   private String password;
   private List<Page> requestPages = new ArrayList<>();
   private String[] responseCodeTime = new String[2];
@@ -29,13 +29,28 @@ public class Server {
    * @param username
    * @param password
    */
-  public Server(String url, String username, String password) {
+  public Server(String url, Notifier notifier, boolean isJavascriptEnabled,String username, String password) {
     this.url = url;
+    this.isJavascriptEnabled = isJavascriptEnabled;
     this.username = username;
     this.password = password;
-    notifier = new EmailNotifier();
+    this.notifier = notifier;
   }
 
+  /**
+   * @param url
+   * @param username
+   * @param password
+   */
+  public Server(String url, boolean isJavascriptEnabled, Notifier notifier) {
+    this.url = url;
+    this.isJavascriptEnabled = isJavascriptEnabled;
+    this.notifier = notifier;
+  }
+
+  
+  
+  
   public void addRequestPage(Page requestPage) {
     requestPages.add(requestPage);
   }

@@ -15,27 +15,19 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Rule;
 //import org.junit.experimental.theories.Theories;
 //import org.junit.runner.RunWith;
 //import static org.junit.Assert.*;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import eu.salingers.tooling.servers.ServerListMapper;
-import eu.salingers.tooling.servers.ServerRequestHandler;
 import eu.salingers.tooling.servers.model.servers.Server;
 
 //@RunWith(Theories.class)
-public class TestReadHtmlPageData {
-  @Rule 
-  public ExpectedException exception = ExpectedException.none();
-
+public class TestReadHtmlPageData extends TestServers {
   private static final String FILENAME_CUSTOMER_PAGE_ELEMENTS = "customer01_page_elements.html";
   private static final String FILENAME_CUSTOMER_PAGE_ELEMENTS_COPY = "customer01_page_elements_temp.html";
 
-  private static final String PATH = "src/test/resources/";
-  
   private static final String ENTRY_RIGHT_AD_ONLY = "";
   private static final String ENTRY_RIGHTS_ALL = "https://staging.identitycloud.ch/appdesigner/,osaTestUserJule,Test_123456,false;";
 
@@ -90,15 +82,11 @@ public class TestReadHtmlPageData {
 //  }
 
   
-  private void handleRequestsForServers(List<Server> servers) throws Exception {
-    new ServerRequestHandler(servers).handleRequests();
-  }
-
   private List<Server> createServerListFromFile() {
     final List<String[]> readPages = createHtmlReader().readPages();
 //    readRecords.stream().map(e -> Arrays.toString(e)).forEach(System.out::println);
-    List<Server> servers = ServerListMapper.createList(readPages);
-    return servers;
+//    List<Server> servers = ServerListMapper.createList(readPages);
+    return null;
   }
 
   private HtmlReader createHtmlReader() {

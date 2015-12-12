@@ -11,28 +11,45 @@ import java.util.stream.Collectors;
 public class CSVReader {
   private static final String LINE_SEPARATOR = ";";
   
-  private Reader source;
+  private CSVFile file;
 
   public CSVReader(Reader source) {
-    this.source = source;
-  }
-
-  List<String> readHeader() {
     try (BufferedReader reader = new BufferedReader(source)) {
-      return reader.lines().findFirst().map(line -> Arrays.asList(line.split(LINE_SEPARATOR))).get();
+//      NOTE: readHeader(reader) must be called first!!!
+      file = new CSVFile(readHeader(reader), readRecords(reader));
     } catch (IOException e) {
+      e.printStackTrace();
       throw new UncheckedIOException(e);
     }
+    
   }
 
+  
+  
+  private List<String> readHeader(BufferedReader reader) {
+        final List<String> list = reader.lines().findFirst().map(line -> Arrays.asList(line.split(LINE_SEPARATOR))).get();
+        return list;
+  }
+
+  private List<String[]> readRecords(BufferedReader reader) {
+        final List<String[]> collect = reader.lines()
+            .map(line -> line.split(LINE_SEPARATOR)).collect(Collectors.toList());
+    collect.stream().map(e ->Arrays.toString(e)).forEach(System.out::println);
+        return collect;
+  }
+
+  public List<String> readHeader() {
+    return file.getHeader();
+  }
+
+  
   public List<String[]> readRecords() {
-    try (BufferedReader reader = new BufferedReader(source)) {
-      return reader.lines()
-          .skip(1)
-          .map(line -> line.split(LINE_SEPARATOR)).collect(Collectors.toList());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+    return file.getRecords();
+  }
+
+  public List<String> readHeaderAndRecords() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   

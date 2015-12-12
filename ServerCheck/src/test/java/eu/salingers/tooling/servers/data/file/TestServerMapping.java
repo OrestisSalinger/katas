@@ -12,10 +12,10 @@ import org.junit.Test;
 import eu.salingers.tooling.servers.ServerListMapper;
 import eu.salingers.tooling.servers.model.servers.Server;
 
-public class TestServerMapping {
-  private final String[] ARRAY1 = {"https://staging.identitycloud.ch/controlcenter, test123 ,Test_123456,false"}; 
-  private final String[] ARRAY2 = {"https://staging.identitycloud.ch/appdesigner,test123,Test_123456,true"};
-  private final String[] ARRAY3 = {"https://staging.identitycloud.ch/iddirect,test123,Test_123456,false"};
+public class TestServerMapping extends TestServers {
+  private final String[] ARRAY1 = {"https://staging.identitycloud.ch/controlcenter, email, false, test123 ,Test_123456"}; 
+  private final String[] ARRAY2 = {"https://staging.identitycloud.ch/appdesigner,email,true,test123,Test_123456"};
+  private final String[] ARRAY3 = {"https://staging.identitycloud.ch/iddirect, email, false, test123,Test_123456"};
 
   @Test
   public void mapArraysToServerList_ServerListSizeEqualsNumberOfArrays() {
@@ -37,10 +37,11 @@ public class TestServerMapping {
     List<Server> servers = ServerListMapper.createList(rawList);
     for (int i = 0; i < servers.size(); i++) {
       System.out.println(servers.get(i));
-      assertThat(servers.get(i).getUrl(), is(equalTo(rawList.get(i)[0].split(",")[0])));
-      assertThat(servers.get(i).getUsername(), is(equalTo(rawList.get(i)[0].split(",")[1])));
-      assertThat(servers.get(i).getPassword(), is(equalTo(rawList.get(i)[0].split(",")[2])));
-      assertThat(servers.get(i).isJavascriptEnabled()+"", is(equalTo(rawList.get(i)[0].split(",")[3])));
+      final String[] split = rawList.get(i)[0].split(",");
+      assertThat(servers.get(i).getUrl(), is(equalTo(split[0])));
+      assertThat(servers.get(i).getUsername(), is(equalTo(split[3])));
+      assertThat(servers.get(i).getPassword(), is(equalTo(split[4])));
+      assertThat(Boolean.toString(servers.get(i).isJavascriptEnabled()), is(equalTo(split[2].trim())));
     }
       
   }
