@@ -37,7 +37,6 @@ public class TestAllEnvironmentsResponseCode extends TestServers {
 
     //See that it I get a Login here
     servers.stream().forEach(e -> {
-      e.setDoLogin(true);
       final String responseHtml = e.getResponseHtml();
       //    System.out.println("Correct Login " + e.getPassword());
       System.out.println(e.getResponseHtml());

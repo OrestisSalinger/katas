@@ -35,12 +35,14 @@ public class TestReadHtmlPageData extends TestServers {
 
  
 
+  @Ignore
   @Test
   public void parseHTML() {
 //    HtmlReader htmlReader = createHtmlReader();
 
   }
-
+  
+  @Ignore
   @Test
   public void readHtmlPages() {
     HtmlReader htmlReader = createHtmlReader();

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,7 +33,7 @@ public class TestPageHandling extends TestServers {
   }
 
   
-  
+ @Ignore
  @Test
  public void createWorkViews_jsPage_workViewsNotEmpty(){
      List<WorkView> views = ph.createWorkViews(server.getRequestPages());

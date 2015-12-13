@@ -2,12 +2,17 @@ package eu.salingers.tooling.servers;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
+//import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.*;
+//import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
+//import static org.hamcrest.CoreMatchers.equalTo;
+
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsNot;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,33 +30,34 @@ public class TestRequestHandling extends TestServers {
   public Page page;
   
   @Before
-  public void getJSServerObject() {
-    
+  public void getJSServerObjectFromStagingIdDirect() {
     server = new Server("https://staging.identitycloud.ch/iddirect",new EmailNotifier(), true, "osaTestUserJule", "Test_123456");
     server.setJavascriptEnabled(Boolean.TRUE);
     page = new Page();
+    
     page.setContainer("/html/body/div/div/div/div[2]/div/div[4]/div[2]");
-    page.setActionButton("/html/body/div/div/div/div[2]/div/div[4]/div[2]/div[1]/div[2]");
+    page.setActionButtonXPath("/html/body/div/div/header/nav/ul/li[2]");
+    server.setRequestPages(Arrays.asList(page));
   }
-
+  @Ignore
   @Test
   public void getPageByHtmlUnitLogin_jsPage_loadingCompleted() {
     HttpUrlServerConnection conni = new HttpUrlServerConnection();
     // TODO Page Object for Server telling me what JS rendered element the
     // HttpUrlServerConnection should wait for
-    server.setRequestPages(Arrays.asList(page));
+    
     conni.setResponseInServer(server);
     final String responseHtml = server.getResponsePages().get(0).getDiv().asXml();
     System.out.println("Response " + responseHtml);
     assertThat(responseHtml, not(containsString("loading")));
 
   }
-
+  @Ignore
   @Test
   public void getPageByHtmlUnitLogin_jsPage_divElementInResponseIsAccessible() throws IOException {
     HttpUrlServerConnection conni = new HttpUrlServerConnection();
     // TODO Page Object for Server telling me what JS rendered element the
-    // HttpUrlServerConnection should wait for
+    // HttpUrlServerConnection I should wait for
     server.setRequestPages(Arrays.asList(page));
     conni.setResponseInServer(server);
     final String responseHtml = server.getResponsePages().get(0).getDiv().asXml();
@@ -107,21 +113,26 @@ public class TestRequestHandling extends TestServers {
 
   
   
+  @Test
+  public void getPageByHtmlUnitLogin_JavaScriptPageEnabledButNoPasswordSet_pageListInServerIsEmpty() {
+    server.setPassword("--");
+    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    assertThat("Page was not loaded",server.getResponsePages().isEmpty(), is(true));
+  }
+ 
+  
+  @Test
+  public void getPageByHtmlUnitLogin_JavaScriptPageEnabled_pageListInServerIsNotEmpty() {
+    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    assertThat("Page was not loaded",server.getResponsePages().isEmpty(), is(false));
+  }
+ 
   
   
   @Test
-  public void getPageByHtmlUnitLogin_jsPage_buttonIsClickable() {
-    HttpUrlServerConnection conni = new HttpUrlServerConnection();
-    // TODO Page Object for Server telling me what JS rendered element the
-    // HttpUrlServerConnection should wait for
-    
-    
-    conni.setResponseInServer(server);
-
-    final String responseHtml = server.getResponseHtml();
-    System.out.println("Response " + responseHtml);
-    assertThat(responseHtml, not(containsString("loading")));
-
+  public void getPageByHtmlUnitLogin_JavaScriptPageEnabled_logoutButtonRetrieved() {
+    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    System.out.println("Button "+ server.getResponsePages().get(0).getActionButtonXPath());
+//    assertThat("getActionButton",server.getResponsePages().get(0).getActionButton(), notNullValue());
   }
-
 }

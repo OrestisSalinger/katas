@@ -12,7 +12,7 @@ public class Page {
   // server
   private InteractivePage iPage;
   private HtmlButton button;
-  private String actionButton;
+  private String actionButtonXPath;
   private String container;  
   public HtmlDivision div;
 
@@ -25,8 +25,8 @@ public class Page {
   }
 
 
-  public String getActionButton() {
-    return actionButton;
+  public String getActionButtonXPath() {
+    return actionButtonXPath;
   }
 
   /**
@@ -35,8 +35,8 @@ public class Page {
   public Page() {
   }
 
-  public void setActionButton(String actionButton) {
-    this.actionButton = actionButton;
+  public void setActionButtonXPath(String actionButtonXPath) {
+    this.actionButtonXPath = actionButtonXPath;
   }
 
   public InteractivePage getiPage() {
