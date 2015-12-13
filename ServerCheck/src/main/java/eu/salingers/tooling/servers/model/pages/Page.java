@@ -7,9 +7,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 
 
 public class Page {
-
-  // TODO Need to pass function proceeding the action on the actual page from
-  // server
+//  TODO Page(handle WebElement)->ConnectPage(delete ConnectElement) -> IDDirectPage(delete application definition)
+//                                                                   -> ControlCenterPage(delete user)
+//                                                                   ...
+  
+// TODO IPage: Need to pass function proceeding the action from the actual page to the server.
   private InteractivePage iPage;
   private HtmlButton button;
   private String actionButtonXPath;
