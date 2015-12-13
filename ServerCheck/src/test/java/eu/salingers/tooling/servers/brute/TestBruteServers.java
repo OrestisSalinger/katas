@@ -1,9 +1,7 @@
 package eu.salingers.tooling.servers.brute;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.*;
 
 import java.util.Collections;
 import java.util.List;

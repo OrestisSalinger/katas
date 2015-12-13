@@ -1,6 +1,5 @@
 package eu.salingers.tooling.servers;
 
-import java.awt.JobAttributes;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,27 +14,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-import javax.management.RuntimeErrorException;
-
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.AjaxController;
-import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager.JavaScriptJobFilter;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.sun.org.glassfish.gmbal.AMXMetadata;
 
 import eu.salingers.tooling.servers.model.pages.Page;
 import eu.salingers.tooling.servers.model.servers.Server;
@@ -47,7 +34,7 @@ public class HttpUrlServerConnection {
 
   public Map<String, String> getHttpResponseCodesWithLogin(List<Server> servers) {
     Map<String, String> responseCodes = new HashMap<>();
-    // TODO: ref to stream
+    // TODO: refactor to stream
     for (Server s : servers) {
       responseCodes.put(s.getUrl(), getResponseCode(s.getUrl(), s.getUsername(), s.getPassword()));
     }
@@ -56,38 +43,29 @@ public class HttpUrlServerConnection {
 
   public String getResponseCode(String address, String username, String password) {
     String responseCode = null;
-    URLConnection conn = null;
+    URLConnection urlConnection = null;
     try {
       URL url = new URL(address);
-      conn = url.openConnection();
-      conn.setConnectTimeout(30000);
+      urlConnection = url.openConnection();
+      urlConnection.setConnectTimeout(30000);
       if (!username.equals("--") && !password.equals("--")) {
-        prepareLoginSession(username, password, conn);
+        prepareLoginSession(username, password, urlConnection);
       }
-      responseCode = conn.getHeaderField(null);
+      responseCode = urlConnection.getHeaderField(null);
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      conn = null;
+      urlConnection = null;
     }
 
     return responseCode;
   }
 
   public Server setResponseInServer(Server server) {
-    System.out.println("is JS enabled: " + server.isJavascriptEnabled());
-    System.out.println("Username: " + server.getUsername());
-    System.out.println("Password: " + server.getPassword());
-    System.out.println("Login: " + server.getDoLogin());
-    
     if (server.isJavascriptEnabled() && !server.getPassword().equals("--")) {
-      System.err.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ JS is enabled !!!!!!!!!!!!!!!!!!!!!!!!!!");
       getPageByHtmlUnitLogin(server);
     } else {
 //    TODO sal: Refactor conn to Optional<URLConnection>
-//      This needs to be:
-//      if js == true && pw,user != -- 
-//        then getPageByHtmlUnitLogin
       System.err.println("JS is NOT enabled!!!");
       URLConnection conn = null;
       try {
@@ -141,16 +119,11 @@ public class HttpUrlServerConnection {
     try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38);) {
       setupWebClient(webClient, server);
       setResponseData(server, webClient);
-
-      webClient.close();
     } catch (FailingHttpStatusCodeException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     
@@ -158,20 +131,15 @@ public class HttpUrlServerConnection {
 
   private static void setResponseData(Server server, final WebClient webClient) throws IOException, MalformedURLException {
     final long startMS = System.currentTimeMillis();
-    System.out.println("Entering setResponseData ");
     HtmlPage page = webClient.getPage(server.getUrl());
-    System.out.println("Title " + page.getTitleText());
     try {
       Thread.sleep(1000L);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     executeJavaScriptCommands(server,page, startMS);
-    
-//    JavaScriptJobManager manager = page.getEnclosingWindow().getJobManager();
-    
     Page responsePage = new Page();
-    final InteractivePage iPage = responsePage.getiPage();
+//    final InteractivePage iPage = responsePage.getiPage();
     server.addResponsePage(responsePage);
     server.setResponseCode(page.getWebResponse().getStatusMessage());
     server.setResponseHeaders(page.getWebResponse().getResponseHeaders());
@@ -184,11 +152,7 @@ public class HttpUrlServerConnection {
       System.out.println("Executing: " + command);
       page.executeJavaScript(command);
     }
-    
-//    page.executeJavaScript("document.getElementById('remove_p31396608').click();");
     System.out.println("page after click on logout \n" + page.asText());
-//    Having the click event I now need to handle the pop-up
-//    page.executeJavaScript("document.getElementById('btn_remove_app_ok').click();");
     HtmlPage newPage = page.getWebClient().getPage(server.getUrl());
     try {
       Thread.sleep(1000L);
@@ -197,13 +161,13 @@ public class HttpUrlServerConnection {
     }
     System.out.println("page after click on logout \n" + newPage.asText());
     System.out.println(getElapsedSeconds(startMs));
-        
   }
 
   private static String getElapsedSeconds(final long startMS) {
     return "Time: " + (System.currentTimeMillis() - startMS) / 1000 + " Sek";
   }
 
+  @SuppressWarnings("unused")
   private static void waitForElement(HtmlPage page, DomElement domElement) {
     System.out.println("Waiting for " + domElement.getId());
     for (int i = 0; i < NUMBER_OF_TRIALS; i++) {
@@ -249,12 +213,13 @@ public class HttpUrlServerConnection {
     webClient.setAjaxController(new NicelyResynchronizingAjaxController());
     webClient.getCookieManager().setCookiesEnabled(true);
     webClient.waitForBackgroundJavaScript(MS_WAIT_FOR_BACKGROUND_SCRIPT);
-    setLoggingOffAddListener(webClient);
+//    setLoggingOffAndAddListener(webClient);
     setAuthorizationRequestHeader(server, webClient);
     System.out.println("Exiting setupWebClient");
   }
 
-  private static void setLoggingOffAddListener(WebClient webClient) {
+  @SuppressWarnings("unused")
+  private static void setLoggingOffAndAddListener(WebClient webClient) {
     LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
     java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
     java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);

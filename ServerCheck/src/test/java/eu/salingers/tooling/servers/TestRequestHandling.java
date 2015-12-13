@@ -1,26 +1,21 @@
 package eu.salingers.tooling.servers;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-//import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.*;
-//import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-//import static org.hamcrest.CoreMatchers.equalTo;
-
-import org.hamcrest.core.Is;
-import org.hamcrest.core.IsNot;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 
-import eu.salingers.tooling.servers.HttpUrlServerConnection;
 import eu.salingers.tooling.servers.model.pages.Page;
 import eu.salingers.tooling.servers.model.servers.Server;
 import eu.salingers.tooling.servers.notify.EmailNotifier;
@@ -34,11 +29,38 @@ public class TestRequestHandling extends TestServers {
     server = new Server("https://staging.identitycloud.ch/iddirect",new EmailNotifier(), true, "osaTestUserJule", "Test_123456");
     server.setJavascriptEnabled(Boolean.TRUE);
     page = new Page();
-    
     page.setContainer("/html/body/div/div/div/div[2]/div/div[4]/div[2]");
     page.setActionButtonXPath("/html/body/div/div/header/nav/ul/li[2]");
     server.setRequestPages(Arrays.asList(page));
   }
+  
+  
+  @Test
+  public void getPageByHtmlUnitLogin_JavaScriptPageEnabledButNoPasswordSet_pageListInServerIsEmpty() {
+    server.setPassword("--");
+    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    assertThat("Page was loaded",server.getResponsePages().isEmpty(), is(true));
+  }
+  
+  @Test
+  public void getPageByHtmlUnitLogin_JavaScriptPageEnabled_pageListInServerIsNotEmpty() {
+    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    assertThat("Page was not loaded",server.getResponsePages().isEmpty(), is(false));
+  }
+ 
+  @Test
+  public void getPageByHtmlUnitLogin_javaScriptPageEnabled_deleteMyAppDef() {
+//    "document.getElementById('import_app').click();",
+    server.setJsCommands(Arrays.asList(new String[]{"document.getElementById('remove_p31396626').click();","document.getElementById('btn_remove_app_ok').click();"}));
+    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    server.setJsCommands(Collections.emptyList());
+  }
+
+  
+  
+  
+  
+  
   @Ignore
   @Test
   public void getPageByHtmlUnitLogin_jsPage_loadingCompleted() {
@@ -60,7 +82,7 @@ public class TestRequestHandling extends TestServers {
     // HttpUrlServerConnection I should wait for
     server.setRequestPages(Arrays.asList(page));
     conni.setResponseInServer(server);
-    final String responseHtml = server.getResponsePages().get(0).getDiv().asXml();
+//    final String responseHtml = server.getResponsePages().get(0).getDiv().asXml();
 //    System.out.println("Response " + responseHtml);
     HtmlDivision div = server.getResponsePages().get(0).getDiv();
       List<?> list = div.getByXPath("div[1]/div[2]");
@@ -112,30 +134,5 @@ public class TestRequestHandling extends TestServers {
 
 
   
-  
-  @Test
-  public void getPageByHtmlUnitLogin_JavaScriptPageEnabledButNoPasswordSet_pageListInServerIsEmpty() {
-    server.setPassword("--");
-    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
-    assertThat("Page was not loaded",server.getResponsePages().isEmpty(), is(true));
-  }
- 
-  
-  @Test
-  public void getPageByHtmlUnitLogin_JavaScriptPageEnabled_pageListInServerIsNotEmpty() {
-    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
-    
-    assertThat("Page was not loaded",server.getResponsePages().isEmpty(), is(false));
-  }
- 
-  
-  
-  @Test
-  public void getPageByHtmlUnitLogin_javaScriptPageEnabled_deleteMyAppDef() {
-//    "document.getElementById('import_app').click();",
-    server.setJsCommands(Arrays.asList(new String[]{"document.getElementById('remove_p31076181').click();","document.getElementById('btn_remove_app_ok').click();"}));
 
-    new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
-    server.setJsCommands(Collections.emptyList());
-  }
 }

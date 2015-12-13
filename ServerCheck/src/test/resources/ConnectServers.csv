@@ -1,4 +1,4 @@
-url;username;password;js_enabled
+    url;username;password;js_enabled
 https://staging.identitycloud.ch/appdesigner/,test123,Test_123456,false;
 https://staging.identitycloud.ch/appdesigner/,osaTestUserJule,Test_123456,false;
 https://staging.identitycloud.ch/controlcenter/,osaTestUserJule,Test_123456,false;
