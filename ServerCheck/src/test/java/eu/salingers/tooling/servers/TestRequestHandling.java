@@ -124,15 +124,18 @@ public class TestRequestHandling extends TestServers {
   @Test
   public void getPageByHtmlUnitLogin_JavaScriptPageEnabled_pageListInServerIsNotEmpty() {
     new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
+    
     assertThat("Page was not loaded",server.getResponsePages().isEmpty(), is(false));
   }
  
   
   
   @Test
-  public void getPageByHtmlUnitLogin_JavaScriptPageEnabled_logoutButtonRetrieved() {
+  public void getPageByHtmlUnitLogin_javaScriptPageEnabled_deleteMyAppDef() {
+//    "document.getElementById('import_app').click();",
+    server.setJsCommands(Arrays.asList(new String[]{"document.getElementById('remove_p31076181').click();","document.getElementById('btn_remove_app_ok').click();"}));
+
     new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
-    System.out.println("Button "+ server.getResponsePages().get(0).getActionButtonXPath());
-//    assertThat("getActionButton",server.getResponsePages().get(0).getActionButton(), notNullValue());
+    server.setJsCommands(Collections.emptyList());
   }
 }

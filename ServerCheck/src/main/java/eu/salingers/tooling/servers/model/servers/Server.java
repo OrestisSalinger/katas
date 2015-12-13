@@ -2,6 +2,7 @@ package eu.salingers.tooling.servers.model.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -15,6 +16,7 @@ public class Server {
   private boolean isJavascriptEnabled;
   private Notifier notifier = new EmailNotifier();
   private String password;
+  private List<String> jsCommands = new ArrayList<>();
   private List<Page> requestPages = new ArrayList<>();
   private String[] responseCodeTime = new String[2];
   private List<NameValuePair> responseHeaders;
@@ -156,6 +158,22 @@ public class Server {
     return doLogin;
   }
 
+  public List<String> getJsCommands() {
+    return Collections.unmodifiableList(jsCommands);
+  }
+
+  public void setJsCommands(List<String> jsCommands) {
+    this.jsCommands = jsCommands;
+  }
+  
+  public void addJsCommands(List<String> jsCommands) {
+    jsCommands.addAll(jsCommands);
+  }
+  
+  public void addJsCommand(String jsCommand) {
+    jsCommands.add(jsCommand);
+  }
+  
   @Override
   public String toString() {
     return "Server [" + (exception != null ? "exception=" + exception + ", " : "") + "isJavascriptEnabled=" + isJavascriptEnabled
@@ -249,6 +267,4 @@ public class Server {
       return false;
     return true;
   }
-
-
 }

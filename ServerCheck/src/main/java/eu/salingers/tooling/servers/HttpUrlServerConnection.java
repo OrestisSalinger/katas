@@ -166,18 +166,7 @@ public class HttpUrlServerConnection {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    page.executeJavaScript("document.getElementById('remove_p31396608').click();");
-    System.out.println("page after click on logout \n" + page.asText());
-//    Having the click event I now need to handle the pop-up
-    page.executeJavaScript("document.getElementById('btn_remove_app_ok').click();");
-    HtmlPage newPage = webClient.getPage(server.getUrl());
-    try {
-      Thread.sleep(1000L);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    System.out.println("page after click on logout \n" + newPage.asText());
-    System.out.println(getElapsedSeconds(startMS));
+    executeJavaScriptCommands(server,page, startMS);
     
 //    JavaScriptJobManager manager = page.getEnclosingWindow().getJobManager();
     
@@ -187,6 +176,28 @@ public class HttpUrlServerConnection {
     server.setResponseCode(page.getWebResponse().getStatusMessage());
     server.setResponseHeaders(page.getWebResponse().getResponseHeaders());
     setJSExceptionsInServer(server, (CancellingJavaScriptErrorListener) webClient.getJavaScriptErrorListener());
+  }
+
+  private static void executeJavaScriptCommands(Server server, HtmlPage page, long startMs) throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+    
+    for (String command : server.getJsCommands()) {
+      System.out.println("Executing: " + command);
+      page.executeJavaScript(command);
+    }
+    
+//    page.executeJavaScript("document.getElementById('remove_p31396608').click();");
+    System.out.println("page after click on logout \n" + page.asText());
+//    Having the click event I now need to handle the pop-up
+//    page.executeJavaScript("document.getElementById('btn_remove_app_ok').click();");
+    HtmlPage newPage = page.getWebClient().getPage(server.getUrl());
+    try {
+      Thread.sleep(1000L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    System.out.println("page after click on logout \n" + newPage.asText());
+    System.out.println(getElapsedSeconds(startMs));
+        
   }
 
   private static String getElapsedSeconds(final long startMS) {
