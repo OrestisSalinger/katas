@@ -12,13 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Emailer {
-//   public static void main(String[] args) {
-//
 //      Emailer.sendEmail("orestis@salingers.eu", "Email test",
-//         "send from Java App", "orestis.eu@googlemail.com",
-//         "orestis.eu@googlemail.com", "h4Tr3?lq_4gZ2a");
-//   }
-
    public static void sendEmail(String to, String subject, String msg,
          String from, String userName, String password) {
       Properties properties = new Properties();
