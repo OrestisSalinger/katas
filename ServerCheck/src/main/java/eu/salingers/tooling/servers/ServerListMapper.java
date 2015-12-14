@@ -2,9 +2,7 @@ package eu.salingers.tooling.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import eu.salingers.tooling.servers.model.servers.Server;
 import eu.salingers.tooling.servers.model.servers.Servers;
@@ -61,7 +59,7 @@ public class ServerListMapper {
 //      throw new IllegalArgumentException(
 //          "Fields described in header are unequal actual fields in record:\n" + Arrays.toString(serverArray));
 //    }
-    
+    // TODO get data structure from file header
     final String url = serverArray[0];
     final Notifier notifier = serverArray[1].equals("email") ? new EmailNotifier() : null;
     final boolean isJavascriptEnabled = serverArray[2].equals("true");

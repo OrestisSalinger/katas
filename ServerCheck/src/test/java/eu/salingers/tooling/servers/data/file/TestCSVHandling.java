@@ -28,7 +28,7 @@ import eu.salingers.tooling.servers.model.servers.Servers;
 
 //@RunWith(Theories.class)
 public class TestCSVHandling extends TestServers {
-  private static final String FILENAME_SRC = "ConnectServersCredentials.csv";
+  private static final String FILENAME_SRC = "ConnectServersCredentialsDoNotPush.csv";
   private static final String FILENAME_TEST = "test_sample.csv";
 
   private static final String HEADER = "url;notifier;javascriptEnabled;username;password";

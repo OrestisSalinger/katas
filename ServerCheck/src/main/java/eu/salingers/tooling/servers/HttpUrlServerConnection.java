@@ -41,7 +41,7 @@ public class HttpUrlServerConnection {
     return responseCodes;
   }
 
-  public String getResponseCode(String address, String username, String password) {
+  private String getResponseCode(String address, String username, String password) {
     String responseCode = null;
     URLConnection urlConnection = null;
     try {
@@ -110,7 +110,7 @@ public class HttpUrlServerConnection {
       while ((line = input.readLine()) != null) {
         sb.append(line + "\n");
       }
-      input.close();
+      input.close();// TODO check if needed
     }
     return sb.toString();
   }
@@ -182,6 +182,7 @@ public class HttpUrlServerConnection {
         }    // TODO Auto-generated method stub
 
       }else{
+        break;
         //      return domElement;
       }
     }      

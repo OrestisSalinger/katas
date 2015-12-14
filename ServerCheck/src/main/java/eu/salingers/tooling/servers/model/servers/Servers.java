@@ -8,11 +8,11 @@ public class Servers {
   private List<String> header;
   
   /**
-   * @param readRecords
-   * @param header
+   * @param servers
+   * @param header TODO: rename because it should not know the csv-file header here.It's just meta data.
    */
-  public Servers(List<String> header, List<String[]> readRecords) {
-    this.servers = readRecords;
+  public Servers(List<String> header, List<String[]> servers) {
+    this.servers = servers;
     this.header = header;
   }
 

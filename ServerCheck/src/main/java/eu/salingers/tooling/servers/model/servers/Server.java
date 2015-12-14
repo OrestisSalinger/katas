@@ -50,9 +50,6 @@ public class Server {
     this.notifier = notifier;
   }
 
-  
-  
-  
   public void addRequestPage(Page requestPage) {
     requestPages.add(requestPage);
   }

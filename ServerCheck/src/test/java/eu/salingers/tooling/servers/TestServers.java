@@ -29,7 +29,7 @@ public class TestServers {
   protected static final int NUMBER_OF_WRONG_CREDENTIAL_ATTEMPTS = 10;
   protected static final String PATH = "src/test/resources/";
   protected static final String FILENAME_NO_CREDENTIALS = "test_sample.csv";
-  protected static final String FILENAME_CREDENTIALS = "ConnectServersCredentials.csv";
+  protected static final String FILENAME_CREDENTIALS = "ConnectServersCredentialsDoNotPush.csv";
   protected static final String FILENAME_CREDENTIALS_STRESS_STAGING = "ConnectServersCredentialsStressStaging.csv";
   protected static final String FILENAME_CREDENTIALS_CAN_BE_BLOCKED = "ConnectServersCredentialsCanBeBlocked.csv";
   

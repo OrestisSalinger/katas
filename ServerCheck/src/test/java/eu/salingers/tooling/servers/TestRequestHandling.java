@@ -51,7 +51,7 @@ public class TestRequestHandling extends TestServers {
   @Test
   public void getPageByHtmlUnitLogin_javaScriptPageEnabled_deleteMyAppDef() {
 //    "document.getElementById('import_app').click();",
-    server.setJsCommands(Arrays.asList(new String[]{"document.getElementById('remove_p31396626').click();","document.getElementById('btn_remove_app_ok').click();"}));
+    server.setJsCommands(Arrays.asList(new String[]{"document.getElementById('remove_p31396635').click();","document.getElementById('btn_remove_app_ok').click();"}));
     new ServerRequestHandler(Arrays.asList(new Server[]{server})).handleRequests();
     server.setJsCommands(Collections.emptyList());
   }
