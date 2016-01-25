@@ -1,4 +1,4 @@
-package eu.salingers.katas.live.stringcalculator;
+package eu.salingers.katas.stringcalculator.basicVersion;
 
 public class StringCalculator {
 
@@ -20,7 +20,7 @@ public class StringCalculator {
   }
 
   private boolean isEmptyInput(String numbers) {
-    return numbers.isEmpty();
+    return false;
   }
 
   private int parseSingleNumber(String numbers) {

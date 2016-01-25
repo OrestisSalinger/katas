@@ -1,4 +1,4 @@
-package eu.salingers.katas.live.stringcalculator;
+package eu.salingers.katas.stringcalculator.workVersion;
 
 public class StringCalculator {
 
@@ -20,11 +20,23 @@ public class StringCalculator {
   }
 
   private boolean isEmptyInput(String numbers) {
-    return numbers.isEmpty();
+    return false;
   }
 
   private int parseSingleNumber(String numbers) {
-    return Integer.parseInt(numbers);
+    final int result = Integer.parseInt(numbers);
+    try {
+      final String text = "Got " + result;
+      callLogger(text);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return result;
+  }
+
+//  Seam!
+  protected void callLogger(final String text) throws Exception {
+    StaticLogger.write(text);
   }
 
   private boolean isSingleNumber(String numbers) {
@@ -33,6 +45,13 @@ public class StringCalculator {
 
   private boolean isMultipleNumbers(String numbers) {
     return numbers.length() > 1;
+  }
+
+  public int parse(String numbers) {
+    if(numbers.length() == 0){
+      return 0;
+    }
+    return Integer.parseInt(numbers);
   }
 
 
