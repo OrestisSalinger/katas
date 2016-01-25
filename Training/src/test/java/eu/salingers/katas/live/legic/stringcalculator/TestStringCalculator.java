@@ -1,22 +1,19 @@
-package eu.salingers.katas.live.stringcalculator;
+package eu.salingers.katas.live.legic.stringcalculator;
 
 import static org.junit.Assert.assertEquals;
 //import junitparams.JUnitParamsRunner;
 
 import org.junit.Test;
 
+import eu.salingers.katas.live.legic.stringcalculator.StringCalculator;
+
 public class TestStringCalculator {
 
 
 	@Test
 	public void add_emptyString_returnsZero() {
-		assertEquals(0, calculator().add(""));
+		assertEquals(0, new StringCalculator().add(""));
 	}
-
-  private StringCalculator calculator() {
-    final StringCalculator stringCalculator = new StringCalculator();
-    return stringCalculator;
-  }
 
 	@Test
 	public void add_singleValue_isReplied() {

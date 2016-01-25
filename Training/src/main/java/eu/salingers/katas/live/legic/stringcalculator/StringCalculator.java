@@ -1,4 +1,4 @@
-package eu.salingers.katas.live.stringcalculator;
+package eu.salingers.katas.live.legic.stringcalculator;
 
 public class StringCalculator {
 
