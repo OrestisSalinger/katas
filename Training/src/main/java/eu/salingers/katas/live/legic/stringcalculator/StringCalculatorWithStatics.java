@@ -27,11 +27,16 @@ public class StringCalculatorWithStatics {
     final int result = Integer.parseInt(numbers);
     try {
       final String text = "Got " + result;
-      StaticLogger.write(text);
+      write(text);
     } catch (Exception e) {
+      // do something about it...
       e.printStackTrace();
     }
     return result;
+  }
+
+  protected void write(final String text) throws Exception {
+    StaticLogger.write(text);
   }
 
 

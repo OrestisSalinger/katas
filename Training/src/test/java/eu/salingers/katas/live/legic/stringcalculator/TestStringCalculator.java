@@ -19,7 +19,7 @@ public class TestStringCalculator {
     assertEquals(expected, actual);
   }
     
-  
+//  Don't use this:
   @Test(expected = IllegalArgumentException.class)
   public void add_negativeNumber_throwsException() {
     
