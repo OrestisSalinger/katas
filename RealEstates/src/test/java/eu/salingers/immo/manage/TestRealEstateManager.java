@@ -3,12 +3,12 @@ package eu.salingers.immo.manage;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.hamcrest.collection.IsIterableWithSize;
+import org.hamcrest.core.Is;
 import org.junit.Test;
 
 import eu.salingers.fixtures.ApartmentFixture;
@@ -61,18 +61,18 @@ public class TestRealEstateManager {
   }
   
   @Test
-  public void createBuilding_addBuildingWithTwoAppartments_managerReturnsBuildingWithTheseTwoApartments() {
+  public void createBuilding_addBuildingTwoAppartmentsDiffSquares_managerReturnsBuildingWithTwoApartmentsOfDiffSquares() {
     RealEstateManager manager = new RealEstateManager();
+    
     final Apartment apartment = ApartmentFixture.standard;
-    final Apartment differentApartment = ApartmentFixture.standardWithDifferentRoomSquares;
+
+    final Apartment differentApartment = ApartmentFixture.standardWithDifferentSquares;
+    
     manager.addAppartments(Arrays.asList(new Apartment[]{apartment,differentApartment}));
-    Building building = manager.createBuilding();
+    final Building building = manager.createBuilding();
     
-    
-    Apartment apartmentFromManager = manager.getApartments().get(0);
-    
-    assertThat(apartmentFromManager.getBathRooms(), hasSize(2)); 
-    
+    assertThat(building.getApartments().get(0).getSquareMeters(), Is.is(100.1));
+    assertThat(building.getApartments().get(1).getSquareMeters(), Is.is(100.2));
   }
   
   
